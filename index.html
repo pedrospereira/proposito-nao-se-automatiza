@@ -1,0 +1,1153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propósito não se automatiza</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Slides da palestra de Pedro Pereira no 5º Seminário Internacional Sunflower, 7 de novembro de 2026.">
+<meta property="og:title" content="Propósito não se automatiza">
+<meta property="og:description" content="Slides da palestra de Pedro Pereira no 5º Seminário Internacional Sunflower.">
+<meta name="theme-color" content="#0A0E2A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#0A0E2A; --bg2:#12163A; --ink:#F6F0E4; --muted:#B9B2C8; --line:rgba(246,240,228,.14);
+  --amber:#F2B705; --card:#0E1235; --shadow:0 18px 50px rgba(0,0,0,.45);
+  --s: 0.5; color-scheme: dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --bg:#FBF7EE; --bg2:#F3EBDC; --ink:#1C1A17; --muted:#5A5248; --line:rgba(28,26,23,.14); --amber:#8A5A00; --card:#F3EBDC; --shadow:0 14px 40px rgba(28,26,23,.18); color-scheme: light; }
+}
+:root[data-theme="light"]{ --bg:#FBF7EE; --bg2:#F3EBDC; --ink:#1C1A17; --muted:#5A5248; --line:rgba(28,26,23,.14); --amber:#8A5A00; --card:#F3EBDC; --shadow:0 14px 40px rgba(28,26,23,.18); color-scheme: light; }
+:root[data-theme="dark"]{ --bg:#0A0E2A; --bg2:#12163A; --ink:#F6F0E4; --muted:#B9B2C8; --line:rgba(246,240,228,.14); --amber:#F2B705; --card:#0E1235; --shadow:0 18px 50px rgba(0,0,0,.45); color-scheme: dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1232px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--bg)}
+
+/* Top */
+header.top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:12px;height:56px}
+header.top .t{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:17px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 14px 'DM Sans',Arial,sans-serif;padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.btn.primary{background:#F2B705;border-color:#F2B705;color:#1C1A17}
+.btn:focus-visible,.card:focus-visible{outline:3px solid #F2B705;outline-offset:3px}
+
+.hero{padding-block:44px 28px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin:0 0 10px}
+.hero h1{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:clamp(34px,6vw,64px);line-height:1.05;margin:0 0 14px}
+.hero p{margin:0;color:var(--muted);font-size:clamp(16px,2.2vw,19px);line-height:1.5;max-width:720px}
+.hero .who{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
+.hero .who b{color:var(--ink)}
+.hero .who a{text-decoration:none;color:var(--amber);font-weight:700}
+
+/* Slide list */
+main{padding-bottom:40px}
+.card{margin:0 0 28px;scroll-margin-top:72px}
+.frame{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#000;cursor:zoom-in}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;transform:scale(var(--s))}
+.cap{display:flex;gap:12px;align-items:baseline;margin:10px 4px 0;color:var(--muted);font-size:14px;line-height:1.4}
+.cap .num{font-weight:700;color:var(--amber);font-variant-numeric:tabular-nums}
+
+footer{border-top:1px solid var(--line);padding-block:28px 48px;color:var(--muted);font-size:14px;line-height:1.6}
+footer .row{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+footer img{height:36px;width:auto}
+footer a{color:var(--amber);font-weight:700;text-decoration:none}
+
+/* Slide canvas: the deck's slide format */
+.slide{position:relative;width:1920px;height:1080px;overflow:hidden;font-size:32px;line-height:1.4;text-align:left;-webkit-text-size-adjust:none;text-size-adjust:none}
+.slide:not([style*="display"]){display:flex;flex-direction:column}
+.slide *{margin:0;box-sizing:border-box}
+.slide > *:not([style*="position:absolute"]){position:relative}
+.slide div:not([style*="display"]){display:flex;flex-direction:column}
+.slide h1{font-size:96px;font-weight:600;line-height:1.1}
+.slide h2{font-size:64px;font-weight:600;line-height:1.15}
+.slide h3{font-size:44px;font-weight:600;line-height:1.2}
+.slide img{display:block;max-width:none}
+.slide svg{display:block;overflow:visible}
+.slide .xshape{display:block}
+.slide .xshape.ellipse{border-radius:50%}
+.slide .xicon{display:inline-flex;flex:none}
+.slide .xicon svg{width:100%;height:100%}
+.slide iframe.embed{border:0;background:transparent;pointer-events:none;display:block;color-scheme:normal}
+
+/* Builds: play once when the slide comes into view */
+.js .slide:not(.play) [data-build-in]{visibility:hidden}
+.slide.play [data-build-in]{animation:b-fade .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+.slide.play [data-build-in^="rise"]{animation-name:b-rise}
+.slide.play [data-build-in^="pop"]{animation-name:b-pop}
+@keyframes b-fade{from{opacity:0}}
+@keyframes b-rise{from{opacity:0;translate:0 44px}}
+@keyframes b-pop{from{opacity:0;scale:.4}}
+@media (prefers-reduced-motion: reduce){
+  .slide.play [data-build-in]{animation:none}
+  html{scroll-behavior:auto}
+}
+
+/* Full-screen viewer */
+.viewer{position:fixed;inset:0;z-index:50;background:#05071A;display:none;align-items:center;justify-content:center;touch-action:pan-y}
+.viewer.on{display:flex}
+.viewer .vframe{position:relative;overflow:hidden;width:calc(1920px * var(--vs));height:calc(1080px * var(--vs))}
+.viewer .vframe .stage{transform:scale(var(--vs))}
+.viewer .bar{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;align-items:center;gap:10px;padding:12px 12px calc(12px + env(safe-area-inset-bottom, 0px));background:linear-gradient(transparent,rgba(0,0,0,.55));opacity:1;transition:opacity .3s}
+.viewer.idle .bar{opacity:0}
+.viewer .bar .btn{background:rgba(10,14,42,.7);color:#F6F0E4;border-color:rgba(246,240,228,.25)}
+.viewer .count{color:#F6F0E4;font:700 14px 'DM Sans',Arial,sans-serif;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+.viewer .hit{position:absolute;top:0;bottom:64px;width:30%;cursor:pointer}
+.viewer .hit.l{left:0}.viewer .hit.r{right:0}
+.viewer .x{position:absolute;top:calc(10px + env(safe-area-inset-top, 0px));right:calc(10px + env(safe-area-inset-right, 0px))}
+.viewer .x .btn{background:rgba(10,14,42,.7);color:#F6F0E4;border-color:rgba(246,240,228,.25)}
+body.lock{overflow:hidden}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <img src="assets/logo-sunflower.png" alt="Seminário Internacional Sunflower" style="height:28px;width:auto">
+  <span class="t">Propósito não se automatiza</span>
+  <button class="btn primary" id="startBtn" type="button">Ver em tela cheia</button>
+</div></header>
+
+<div class="wrap hero">
+  <p class="eyebrow">5º Seminário Internacional Sunflower · 7 nov 2026</p>
+  <h1>Propósito não se automatiza</h1>
+  <p>Os slides da palestra sobre o diferencial humano na era da IA. Role para ver todos, ou toque em um slide para abrir em tela cheia.</p>
+  <div class="who"><b>Pedro Pereira</b><a href="https://www.linkedin.com/in/pedrop" target="_blank" rel="noopener">LinkedIn in/pedrop</a><a href="https://www.instagram.com/pedro_s_pereira" target="_blank" rel="noopener">Instagram @pedro_s_pereira</a></div>
+</div>
+
+<main class="wrap" id="list">
+<article class="card" id="slide-1" aria-label="Slide 1: Propósito não se automatiza">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="cover" style="background:#0E0E3A;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:0">
+<img loading="lazy" decoding="async" src="assets/girassol-entardecer.jpg" alt="Ilustração de um grande girassol ao entardecer diante de um campo de girassóis, com constelações conectadas no céu" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}.g{position:absolute;left:1030px;top:70px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.35),rgba(255,214,130,0) 65%);animation:gl 6s ease-in-out infinite}@keyframes gl{50%{transform:scale(1.12);opacity:.6}}i{position:absolute;display:block;border-radius:50%;background:#F7C531;opacity:0;animation:fl linear infinite}i:nth-child(3n){background:#FFD54F}@keyframes fl{0%{opacity:0;transform:translate(0,0) rotate(0)}8%{opacity:.95}85%{opacity:.85}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(620deg)}}b{position:absolute;width:4px;height:4px;border-radius:50%;background:#E6ECFF;box-shadow:0 0 8px 2px rgba(180,200,255,.8);opacity:.2;animation:tw ease-in-out infinite}@keyframes tw{50%{opacity:1;transform:scale(1.6)}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;g&quot;&gt;&lt;/div&gt;&lt;i style=&quot;left:1479px;top:537px;width:26px;height:7px;animation-duration:16.0s;animation-delay:-12.4s;--dx:-849px;--dy:98px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1293px;top:404px;width:19px;height:10px;animation-duration:14.3s;animation-delay:-9.2s;--dx:-708px;--dy:154px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1342px;top:600px;width:22px;height:8px;animation-duration:15.6s;animation-delay:-1.2s;--dx:-1071px;--dy:231px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1283px;top:620px;width:16px;height:8px;animation-duration:15.6s;animation-delay:-15.4s;--dx:-800px;--dy:137px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1355px;top:342px;width:26px;height:8px;animation-duration:12.1s;animation-delay:-15.5s;--dx:-818px;--dy:408px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1383px;top:278px;width:22px;height:8px;animation-duration:16.6s;animation-delay:-4.2s;--dx:-899px;--dy:358px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1464px;top:485px;width:21px;height:7px;animation-duration:12.9s;animation-delay:-13.1s;--dx:-988px;--dy:187px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1422px;top:524px;width:16px;height:9px;animation-duration:16.9s;animation-delay:-0.4s;--dx:-1150px;--dy:367px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1237px;top:554px;width:21px;height:10px;animation-duration:14.5s;animation-delay:-0.1s;--dx:-728px;--dy:142px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1612px;top:341px;width:19px;height:10px;animation-duration:13.1s;animation-delay:-5.7s;--dx:-1015px;--dy:344px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1273px;top:539px;width:21px;height:9px;animation-duration:11.2s;animation-delay:-15.1s;--dx:-755px;--dy:196px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1474px;top:601px;width:21px;height:9px;animation-duration:16.5s;animation-delay:-8.7s;--dx:-887px;--dy:188px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1301px;top:298px;width:18px;height:9px;animation-duration:17.0s;animation-delay:-2.6s;--dx:-729px;--dy:415px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1443px;top:416px;width:19px;height:9px;animation-duration:16.0s;animation-delay:-7.3s;--dx:-953px;--dy:99px&quot;&gt;&lt;/i&gt;&lt;b style=&quot;left:1055px;top:40px;animation-duration:3.7s;animation-delay:-4.2s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:168px;top:459px;animation-duration:4.9s;animation-delay:-3.2s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:910px;top:84px;animation-duration:3.6s;animation-delay:-0.7s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:975px;top:197px;animation-duration:3.6s;animation-delay:-5.0s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:983px;top:606px;animation-duration:3.6s;animation-delay:-2.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:844px;top:307px;animation-duration:3.2s;animation-delay:-2.0s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:186px;top:246px;animation-duration:5.0s;animation-delay:-4.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:728px;top:320px;animation-duration:3.3s;animation-delay:-0.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:328px;top:489px;animation-duration:4.7s;animation-delay:-1.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:908px;top:485px;animation-duration:4.2s;animation-delay:-3.3s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:878px;top:238px;animation-duration:4.3s;animation-delay:-1.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:569px;top:482px;animation-duration:4.2s;animation-delay:-1.5s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:1088px;top:410px;animation-duration:4.0s;animation-delay:-0.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:638px;top:170px;animation-duration:4.2s;animation-delay:-2.3s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:943px;top:408px;animation-duration:4.5s;animation-delay:-1.7s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:748px;top:463px;animation-duration:4.6s;animation-delay:-1.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:972px;top:542px;animation-duration:4.2s;animation-delay:-4.9s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:1101px;top:331px;animation-duration:3.8s;animation-delay:-0.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:965px;top:582px;animation-duration:3.7s;animation-delay:-3.5s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:833px;top:458px;animation-duration:2.9s;animation-delay:-3.9s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:676px;top:419px;animation-duration:3.6s;animation-delay:-3.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:895px;top:402px;animation-duration:4.3s;animation-delay:-0.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:201px;top:285px;animation-duration:4.1s;animation-delay:-1.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:795px;top:399px;animation-duration:2.6s;animation-delay:-2.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:276px;top:52px;animation-duration:2.8s;animation-delay:-1.6s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:225px;top:136px;animation-duration:2.6s;animation-delay:-2.3s&quot;&gt;&lt;/b&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<img loading="lazy" decoding="async" src="assets/logo-sunflower.png" alt="Logo oficial do Seminário Internacional Sunflower" style="position:absolute;left:128px;top:84px;width:400px;height:102px;object-fit:contain">
+<img loading="lazy" decoding="async" src="assets/tema-sunflower.png" alt="O diferencial humano na era da inteligência artificial, tema do 5º Seminário Internacional Sunflower" style="position:absolute;left:1500px;top:56px;width:340px;height:139px;object-fit:contain">
+<p style="position:absolute;left:128px;top:262px;font-size:26px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:#F2B705">5º Seminário Internacional Sunflower</p>
+<h1 style="position:absolute;left:128px;top:310px;width:1080px;font-family:'Fraunces', Georgia, serif;font-size:136px;font-weight:600;line-height:1.02;color:#FBF7EE;text-shadow:0 2px 18px rgba(0,0,0,.55)">Propósito não se automatiza</h1>
+<div style="position:absolute;left:128px;top:628px;width:96px;height:6px;border-radius:3px;background:#F2B705"></div>
+<p style="position:absolute;left:128px;top:660px;font-size:48px;font-weight:700;color:#FBF7EE;text-shadow:0 2px 18px rgba(0,0,0,.55)">Pedro Pereira</p>
+<p style="position:absolute;left:128px;top:728px;font-size:28px;color:#E4DCCB;text-shadow:0 2px 18px rgba(0,0,0,.55)">7 de novembro de 2026</p>
+<p style="position:absolute;left:128px;top:966px;padding:10px 22px;border-radius:999px;background:rgba(10,10,36,.62);font-size:24px;color:#E4DCCB">Instagram <b style="color:#FBF7EE">@pedro_s_pereira</b>   ·   LinkedIn <b style="color:#FBF7EE">in/pedrop</b></p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">01</span><span>Propósito não se automatiza</span></p>
+</article>
+<article class="card" id="slide-2" aria-label="Slide 2: Antes do ChatGPT, um país já preparava seus jovens para a IA.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="camp" style="background:#0B0A14;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<img loading="lazy" decoding="async" src="assets/dubai.jpg" alt="Ilustração de Dubai ao entardecer: Burj Khalifa, Museu do Futuro, Dubai Frame, Emirates Towers e Burj Al Arab, com famílias e moradores no calçadão à beira d'água" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<div style="position:absolute;left:110px;top:118px;width:880px;box-sizing:border-box;background:#FBF7EE;padding:16px 16px 0px 16px;border-radius:6px;box-shadow:0px 30px 70px rgba(0,0,0,0.6);transform:rotate(-2deg)">
+<img loading="lazy" decoding="async" src="assets/gulf-news.png" alt="Recorte do jornal Gulf News sobre o lançamento da segunda edição do UAE AI Camp e foto de Pedro com Omar Sultan Al Olama, Ministro de Estado para Inteligência Artificial dos Emirados" style="width:848px;height:441px;object-fit:cover;border-radius:2px">
+<p style="font-size:22px;line-height:1.3;color:#5A5248;padding:16px 8px 20px 8px">Com Omar Sultan Al Olama, o primeiro ministro de IA do mundo · Gulf News, 2ª edição do camp</p>
+</div>
+<div style="position:absolute;left:480px;top:96px;width:150px;height:38px;background:rgba(242,183,5,0.85);transform:rotate(-5deg)"></div>
+<p style="position:absolute;left:1160px;top:150px;width:660px;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">UAE AI Summer Camp</p>
+<h2 style="position:absolute;left:1160px;top:205px;width:660px;font-family:'Fraunces', Georgia, serif;font-size:60px;font-weight:600;line-height:1.1;text-shadow:0px 4px 24px rgba(0,0,0,0.7)">Antes do ChatGPT, um país já preparava seus jovens para a IA.</h2>
+<p style="position:absolute;left:1160px;top:460px;width:660px;font-size:30px;line-height:1.4;color:#F6F0E4;text-shadow:0px 2px 18px rgba(0,0,0,0.8)">Liderei o UAE AI Summer Camp, com o Ministro de Inteligência Artificial dos Emirados.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">02</span><span>Antes do ChatGPT, um país já preparava seus jovens para a IA.</span></p>
+</article>
+<article class="card" id="slide-3" aria-label="Slide 3: Naquela época nem existia ChatGPT. Imagina agora?">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="camp-linha" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">De 2017 a 2026</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Naquela época nem existia ChatGPT. Imagina agora?</h2>
+<div style="position:absolute;left:128px;top:598px;width:1664px;height:4px;background:#D8CDB8"></div>
+<span class="xshape ellipse" data-build-in="pop order 1 auto" style="position:absolute;left:231px;top:584px;width:32px;height:32px;background:#8A5A00"></span>
+<div data-build-in="rise order 1 auto" style="position:absolute;left:137px;top:400px;width:220px;height:170px;display:flex;flex-direction:column;justify-content:end;gap:4px"><p style="font-size:36px;font-weight:700;color:#8A5A00;text-align:center">2017</p><p style="font-size:24px;text-align:center;line-height:1.25">Primeiro ministro de IA do mundo</p></div>
+<span class="xshape ellipse" data-build-in="pop order 2 auto" style="position:absolute;left:469px;top:584px;width:32px;height:32px;background:#8A5A00"></span>
+<div data-build-in="rise order 2 auto" style="position:absolute;left:375px;top:636px;width:220px;height:170px;display:flex;flex-direction:column;gap:4px"><p style="font-size:36px;font-weight:700;color:#8A5A00;text-align:center">2018</p><p style="font-size:24px;text-align:center;line-height:1.25">1º UAE AI Summer Camp</p></div>
+<span class="xshape ellipse" data-build-in="pop order 3 auto" style="position:absolute;left:707px;top:584px;width:32px;height:32px;background:#8A5A00"></span>
+<div data-build-in="rise order 3 auto" style="position:absolute;left:613px;top:400px;width:220px;height:170px;display:flex;flex-direction:column;justify-content:end;gap:4px"><p style="font-size:36px;font-weight:700;color:#8A5A00;text-align:center">2019</p><p style="font-size:24px;text-align:center;line-height:1.25">2ª edição: meta de 10 mil estudantes</p></div>
+<span class="xshape ellipse" data-build-in="pop order 4 auto" style="position:absolute;left:945px;top:584px;width:32px;height:32px;background:#8A5A00"></span>
+<div data-build-in="rise order 4 auto" style="position:absolute;left:851px;top:636px;width:220px;height:170px;display:flex;flex-direction:column;gap:4px"><p style="font-size:36px;font-weight:700;color:#8A5A00;text-align:center">2019</p><p style="font-size:24px;text-align:center;line-height:1.25">Nasce a primeira universidade de IA</p></div>
+<span class="xshape ellipse" data-build-in="pop order 5 auto" style="position:absolute;left:1183px;top:584px;width:32px;height:32px;background:#8A5A00"></span>
+<div data-build-in="rise order 5 auto" style="position:absolute;left:1089px;top:400px;width:220px;height:170px;display:flex;flex-direction:column;justify-content:end;gap:4px"><p style="font-size:36px;font-weight:700;color:#8A5A00;text-align:center">2022</p><p style="font-size:24px;text-align:center;line-height:1.25">Museu do Futuro abre. ChatGPT chega.</p></div>
+<span class="xshape ellipse" data-build-in="pop order 6 auto" style="position:absolute;left:1421px;top:584px;width:32px;height:32px;background:#8A5A00"></span>
+<div data-build-in="rise order 6 auto" style="position:absolute;left:1327px;top:636px;width:220px;height:170px;display:flex;flex-direction:column;gap:4px"><p style="font-size:36px;font-weight:700;color:#8A5A00;text-align:center">2024</p><p style="font-size:24px;text-align:center;line-height:1.25">Mais de 30 mil jovens já passaram pelo camp</p></div>
+<span class="xshape ellipse" data-build-in="pop order 7 auto" style="position:absolute;left:1644px;top:576px;width:48px;height:48px;background:#F2B705;border:4px solid #1C1A17"></span>
+<div data-build-in="rise order 7 auto" style="position:absolute;left:1548px;top:380px;width:240px;height:180px;display:flex;flex-direction:column;justify-content:center;gap:4px;background:#1C1A17;border-radius:20px;padding:16px"><p style="font-size:36px;font-weight:700;color:#F2B705;text-align:center">2026</p><p style="font-size:24px;text-align:center;line-height:1.25;color:#F6F0E4">Esses jovens já estão no mercado</p></div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">03</span><span>Naquela época nem existia ChatGPT. Imagina agora?</span></p>
+</article>
+<article class="card" id="slide-4" aria-label="Slide 4: IA exige liderança. E liderança não se automatiza.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="lideranca" style="background:#F2B705;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#1C1A17">O que eu aprendi lá</p>
+<h1 style="font-family:'Fraunces', Georgia, serif;font-size:128px;font-weight:700;line-height:1.05;width:1600px">IA exige liderança. E liderança não se automatiza.</h1>
+<p style="font-size:32px;width:1400px;line-height:1.4">“A vida e o sustento das pessoas não têm preço. São inestimáveis.” Omar Al Olama, explicando por que agentes de IA não decidem sobre o sustento das pessoas nos Emirados (out. 2026, tradução livre).</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">04</span><span>IA exige liderança. E liderança não se automatiza.</span></p>
+</article>
+<article class="card" id="slide-5" aria-label="Slide 5: “O futuro pertence a quem consegue imaginá-lo, projetá-lo e executá-lo.”">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="museu" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:180px;width:700px;height:720px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+.stage{height:100%;display:flex;align-items:center;justify-content:center;perspective:1200px}
+.torus{position:relative;width:520px;height:340px;transform-style:preserve-3d;animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:rotateX(12deg) rotateY(-18deg) translateY(0)}50%{transform:rotateX(8deg) rotateY(12deg) translateY(-14px)}}
+.ring{position:absolute;inset:0;border-radius:50%;border:64px solid transparent;background:linear-gradient(#1C1A17,#1C1A17) padding-box,linear-gradient(135deg,#F6F0E4,#B8AE9C 40%,#6E675C 70%,#F2B705) border-box;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.glow{position:absolute;left:50%;top:50%;width:200px;height:90px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(242,183,5,.55),rgba(242,183,5,0));animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.base{position:absolute;left:50%;bottom:-150px;width:440px;height:60px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(242,183,5,.25),rgba(0,0,0,0))}
+.dots{position:absolute;inset:16px;border-radius:50%;background:repeating-conic-gradient(rgba(28,26,23,.55) 0 2deg,transparent 2deg 9deg);-webkit-mask:radial-gradient(closest-side,transparent 70%,#000 72%);mask:radial-gradient(closest-side,transparent 70%,#000 72%)}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;stage&quot;&gt;&lt;div class=&quot;torus&quot;&gt;&lt;div class=&quot;ring&quot;&gt;&lt;/div&gt;&lt;div class=&quot;dots&quot;&gt;&lt;/div&gt;&lt;div class=&quot;glow&quot;&gt;&lt;/div&gt;&lt;div class=&quot;base&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p style="position:absolute;left:880px;top:180px;width:912px;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Museu do Futuro, Dubai</p>
+<h2 style="position:absolute;left:880px;top:236px;width:912px;font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:600;font-style:italic;line-height:1.15">“O futuro pertence a quem consegue imaginá-lo, projetá-lo e executá-lo.”</h2>
+<div style="position:absolute;left:880px;top:540px;width:912px;display:flex;flex-direction:column;gap:16px">
+<p data-build-in="rise order 1" style="font-size:30px;background:#2A2620;padding:18px 28px;border-radius:16px;border-left:6px solid #F2B705"><b>Saúde e bem-estar</b> · terapias para corpo e mente</p>
+<p data-build-in="rise order 2" style="font-size:30px;background:#2A2620;padding:18px 28px;border-radius:16px;border-left:6px solid #F2B705"><b>Planeta</b> · restaurar a natureza</p>
+<p data-build-in="rise order 3" style="font-size:30px;background:#2A2620;padding:18px 28px;border-radius:16px;border-left:6px solid #F2B705"><b>Tecnologia</b> · respostas para os desafios de hoje</p>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">05</span><span>“O futuro pertence a quem consegue imaginá-lo, projetá-lo e executá-lo.”</span></p>
+</article>
+<article class="card" id="slide-6" aria-label="Slide 6: 01 · O poder real da IA">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="parte1" style="background:#0A0E2A;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:150px 128px 128px 128px;display:flex;flex-direction:column;justify-content:flex-start;gap:40px">
+<img loading="lazy" decoding="async" src="assets/parte1-noite.jpg" alt="Ilustração noturna de uma pessoa no alto de uma encosta olhando uma cidade iluminada, com uma grande rede neural brilhando no céu" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<p style="font-family:'Fraunces', Georgia, serif;font-size:200px;font-weight:700;line-height:1;color:#F2B705;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">01</p>
+<h1 style="font-family:'Fraunces', Georgia, serif;font-size:112px;font-weight:700;line-height:1.05;width:1100px;color:#F6F0E4;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">O poder real da IA</h1>
+<p style="font-size:36px;width:860px;line-height:1.4;color:#EFE7D8;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">O que ela é hoje, quem está construindo e por que ninguém pode ficar de fora.</p>
+<img loading="lazy" decoding="async" src="assets/logo-sunflower.png" alt="Logo Sunflower" style="position:absolute;left:128px;top:912px;width:320px;height:81px;object-fit:contain">
+</section>
+
+</div></div>
+<p class="cap"><span class="num">06</span><span>01 · O poder real da IA</span></p>
+</article>
+<article class="card" id="slide-7" aria-label="Slide 7: Quatro camadas sobre uma base: o contexto">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="ia-hoje" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">O que é a IA hoje</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Quatro camadas sobre uma base: o contexto</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:340px;width:1664px;height:612px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#F6F0E4;overflow:hidden}
+.wrap{display:flex;height:100%;align-items:center}
+.stage{width:760px;height:612px;perspective:1600px;display:flex;align-items:center;justify-content:center}
+.stack{position:relative;width:340px;height:340px;transform-style:preserve-3d;transform:rotateX(60deg) rotateZ(-40deg);animation:sway 9s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotateX(60deg) rotateZ(-40deg)}50%{transform:rotateX(56deg) rotateZ(-30deg)}}
+.slab{position:absolute;left:0;top:0;width:340px;height:340px;border-radius:28px;opacity:0;box-shadow:0 0 0 2px rgba(255,255,255,0.15) inset}
+.s0{left:-40px;top:-40px;width:420px;height:420px;border-radius:36px;background:repeating-linear-gradient(0deg,rgba(79,163,255,.22) 0 2px,transparent 2px 28px),repeating-linear-gradient(90deg,rgba(79,163,255,.22) 0 2px,transparent 2px 28px),rgba(30,111,217,.18);box-shadow:0 0 0 3px #4FA3FF inset,0 0 60px rgba(79,163,255,.55);animation:a0 1s ease-out .1s forwards,glow 3s ease-in-out 1.2s infinite}
+@keyframes a0{from{opacity:0;transform:translateZ(-300px)}to{opacity:1;transform:translateZ(-90px)}}
+@keyframes glow{50%{box-shadow:0 0 0 3px #8CC4FF inset,0 0 110px rgba(79,163,255,.85)}}
+.s1{background:linear-gradient(135deg,#5A5248,#3B3630);animation:a1 1s ease-out .6s forwards}
+.s2{background:linear-gradient(135deg,#8A6A2A,#5E4618);animation:a2 1s ease-out 1.2s forwards}
+.s3{background:linear-gradient(135deg,#C99307,#9A7004);animation:a3 1s ease-out 1.8s forwards}
+.s4{background:linear-gradient(135deg,#FFD04A,#F2B705);animation:a4 1s ease-out 2.4s forwards}
+@keyframes a1{from{opacity:0;transform:translateZ(240px)}to{opacity:1;transform:translateZ(0px)}}
+@keyframes a2{from{opacity:0;transform:translateZ(330px)}to{opacity:1;transform:translateZ(90px)}}
+@keyframes a3{from{opacity:0;transform:translateZ(420px)}to{opacity:1;transform:translateZ(180px)}}
+@keyframes a4{from{opacity:0;transform:translateZ(510px)}to{opacity:1;transform:translateZ(270px)}}
+.list{flex:1;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;align-items:center;gap:24px;opacity:0;transform:translateX(30px)}
+.row.r4{animation:in .7s ease-out 2.6s forwards}.row.r3{animation:in .7s ease-out 2s forwards}.row.r2{animation:in .7s ease-out 1.4s forwards}.row.r1{animation:in .7s ease-out .8s forwards}.row.r0{animation:in .7s ease-out .2s forwards;margin-top:10px;padding:16px 20px;border-radius:18px;background:rgba(30,111,217,.16);box-shadow:0 0 0 2px #4FA3FF inset}
+.r0 .t{color:#8CC4FF}
+@keyframes in{to{opacity:1;transform:none}}
+.dot{width:28px;height:28px;border-radius:8px;flex:none}
+.t{font-size:36px;font-weight:700}
+.d{font-size:26px;color:#CFC6B8;margin-top:4px}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;wrap&quot;&gt;
+&lt;div class=&quot;stage&quot;&gt;&lt;div class=&quot;stack&quot;&gt;&lt;div class=&quot;slab s0&quot;&gt;&lt;/div&gt;&lt;div class=&quot;slab s1&quot;&gt;&lt;/div&gt;&lt;div class=&quot;slab s2&quot;&gt;&lt;/div&gt;&lt;div class=&quot;slab s3&quot;&gt;&lt;/div&gt;&lt;div class=&quot;slab s4&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;list&quot;&gt;
+&lt;div class=&quot;row r4&quot;&gt;&lt;div class=&quot;dot&quot; style=&quot;background:#F2B705&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Age&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Agentes que executam tarefas por você&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row r3&quot;&gt;&lt;div class=&quot;dot&quot; style=&quot;background:#C99307&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Raciocina&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Planeja, resolve problemas em etapas&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row r2&quot;&gt;&lt;div class=&quot;dot&quot; style=&quot;background:#8A6A2A&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Gera&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Texto, imagem, voz, vídeo e código&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row r1&quot;&gt;&lt;div class=&quot;dot&quot; style=&quot;background:#5A5248&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Percebe&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Lê, vê e ouve o mundo&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row r0&quot;&gt;&lt;div class=&quot;dot&quot; style=&quot;background:#4FA3FF;box-shadow:0 0 14px #4FA3FF&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Base: contexto e conhecimento&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Sustenta cada camada. Sem ela, a IA chuta.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">07</span><span>Quatro camadas sobre uma base: o contexto</span></p>
+</article>
+<article class="card" id="slide-8" aria-label="Slide 8: A IA já leu quase tudo. Menos a sua história.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="conhecimento" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">O que a IA absorve</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">A IA já leu quase tudo. Menos a sua história.</h2>
+<div data-build-in="rise order 1 auto" style="position:absolute;left:128px;top:350px;width:520px;height:470px;display:flex;flex-direction:column;gap:18px;background:rgba(30,111,217,0.16);border-radius:28px;padding:40px;box-shadow:0 0 0 2px #4FA3FF inset"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#8CC4FF" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c3 3.2 3 16.8 0 20M12 2c-3 3.2-3 16.8 0 20"/></svg><p style="font-family:'Fraunces', Georgia, serif;font-size:46px;font-weight:700;line-height:1.05;color:#8CC4FF">Conhecimento genérico</p><p style="font-size:30px;line-height:1.3">O que é público: livros, sites, ciência, código. Igual para todo mundo.</p><p style="font-size:24px;line-height:1.3;color:#CFC6B8">Um único modelo treinou com mais de 15 trilhões de tokens (Meta, 2024).</p></div>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:668px;top:330px;width:560px;height:500px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+.c{position:absolute;left:280px;top:250px;width:0;height:0}
+i{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;opacity:0;animation:flow 4s ease-in infinite}
+i.b{background:#4FA3FF;box-shadow:0 0 12px #4FA3FF}
+i.a{width:18px;height:18px;left:-9px;top:-9px;background:#F2B705;box-shadow:0 0 18px #F2B705}
+@keyframes flow{0%{opacity:0;transform:translate(var(--x),var(--y)) scale(1)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate(0,0) scale(.3)}}
+.core{position:absolute;left:-90px;top:-90px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle at 60% 50%,#FFE48A 0,#F2B705 22%,rgba(79,163,255,.9) 48%,rgba(30,111,217,.35) 70%,transparent 72%);box-shadow:0 0 80px rgba(79,163,255,.6),0 0 140px rgba(242,183,5,.35);animation:pulse 3s ease-in-out infinite}
+.ring{position:absolute;left:-130px;top:-130px;width:256px;height:256px;border-radius:50%;border:2px solid rgba(140,196,255,.35);animation:spin 14s linear infinite;border-top-color:#F2B705}
+@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 110px rgba(79,163,255,.8),0 0 180px rgba(242,183,5,.5)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;c&quot;&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-253px;--y:52px;animation-delay:2.60s;animation-duration:3.11s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-268px;--y:-11px;animation-delay:0.23s;animation-duration:3.76s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-240px;--y:139px;animation-delay:0.28s;animation-duration:3.14s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-290px;--y:25px;animation-delay:0.50s;animation-duration:3.33s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-295px;--y:-44px;animation-delay:2.31s;animation-duration:3.60s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-222px;--y:-133px;animation-delay:3.43s;animation-duration:3.43s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-238px;--y:102px;animation-delay:1.23s;animation-duration:4.22s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-264px;--y:101px;animation-delay:2.56s;animation-duration:3.56s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-253px;--y:-14px;animation-delay:0.24s;animation-duration:3.31s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-267px;--y:-56px;animation-delay:1.26s;animation-duration:3.88s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-265px;--y:14px;animation-delay:3.18s;animation-duration:4.05s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-269px;--y:81px;animation-delay:2.10s;animation-duration:4.31s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-257px;--y:-69px;animation-delay:3.92s;animation-duration:3.18s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-287px;--y:27px;animation-delay:0.61s;animation-duration:3.73s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-251px;--y:145px;animation-delay:3.06s;animation-duration:3.86s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-245px;--y:-112px;animation-delay:2.78s;animation-duration:3.89s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-272px;--y:-25px;animation-delay:3.36s;animation-duration:4.42s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-283px;--y:8px;animation-delay:0.24s;animation-duration:4.05s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-296px;--y:-51px;animation-delay:3.29s;animation-duration:3.43s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-281px;--y:37px;animation-delay:0.09s;animation-duration:3.69s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-241px;--y:96px;animation-delay:0.24s;animation-duration:4.15s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-243px;--y:109px;animation-delay:1.56s;animation-duration:4.31s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-247px;--y:127px;animation-delay:2.20s;animation-duration:4.33s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-277px;--y:-106px;animation-delay:1.11s;animation-duration:3.62s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-291px;--y:48px;animation-delay:3.83s;animation-duration:3.23s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-247px;--y:96px;animation-delay:0.93s;animation-duration:3.73s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-262px;--y:-27px;animation-delay:0.02s;animation-duration:3.63s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-276px;--y:42px;animation-delay:3.81s;animation-duration:4.04s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-281px;--y:-5px;animation-delay:2.70s;animation-duration:3.08s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-264px;--y:-129px;animation-delay:3.50s;animation-duration:4.20s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-268px;--y:33px;animation-delay:0.41s;animation-duration:3.95s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-227px;--y:123px;animation-delay:0.84s;animation-duration:3.24s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-249px;--y:46px;animation-delay:0.00s;animation-duration:3.23s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;b&quot; style=&quot;--x:-245px;--y:120px;animation-delay:0.10s;animation-duration:4.31s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;a&quot; style=&quot;--x:255px;--y:28px;animation-delay:1.01s;animation-duration:4.02s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;a&quot; style=&quot;--x:253px;--y:-33px;animation-delay:3.40s;animation-duration:4.99s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;a&quot; style=&quot;--x:269px;--y:-9px;animation-delay:0.34s;animation-duration:3.65s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;a&quot; style=&quot;--x:258px;--y:-39px;animation-delay:3.32s;animation-duration:3.74s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;a&quot; style=&quot;--x:263px;--y:-128px;animation-delay:2.11s;animation-duration:3.72s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;a&quot; style=&quot;--x:251px;--y:10px;animation-delay:2.11s;animation-duration:4.97s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;a&quot; style=&quot;--x:264px;--y:95px;animation-delay:1.04s;animation-duration:4.05s&quot;&gt;&lt;/i&gt;&lt;div class=&quot;ring&quot;&gt;&lt;/div&gt;&lt;div class=&quot;core&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<div data-build-in="rise order 2 auto" style="position:absolute;left:1248px;top:350px;width:544px;height:470px;display:flex;flex-direction:column;gap:18px;background:rgba(242,183,5,0.12);border-radius:28px;padding:40px;box-shadow:0 0 0 2px #F2B705 inset"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#F2B705" stroke-width="1.6" stroke-linecap="round"><path d="M6.5 6.5a7 7 0 0 1 11 5.5v2"/><path d="M5 10.5v3a7 7 0 0 0 2 5"/><path d="M9 11.5a3 3 0 0 1 6 0v2.5a9 9 0 0 1-1.5 5"/><path d="M12 11.5v3a6 6 0 0 1-2 4.5"/><path d="M17.5 17.5a10 10 0 0 1-1 3"/></svg><p style="font-family:'Fraunces', Georgia, serif;font-size:46px;font-weight:700;line-height:1.05;color:#F2B705">Conhecimento particular</p><p style="font-size:30px;line-height:1.3">Seus dados, seus clientes, sua experiência, seu porquê. Só você tem.</p><p style="font-size:24px;line-height:1.3;color:#CFC6B8">Entra pelo contexto: o que você conta, anexa e conecta.</p></div>
+<p data-build-in="fade order 3 auto" style="position:absolute;left:128px;top:870px;width:1664px;text-align:center;font-family:'Fraunces', Georgia, serif;font-size:44px;font-weight:600;line-height:1.2">O modelo é igual para todos. O contexto que você dá torna a resposta sua.</p>
+<p data-build-in="fade order 4 auto" style="position:absolute;left:128px;top:950px;width:1664px;text-align:center;font-size:32px;font-weight:700;color:#F2B705">E o conhecimento mais particular de todos é o seu propósito.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">08</span><span>A IA já leu quase tudo. Menos a sua história.</span></p>
+</article>
+<article class="card" id="slide-9" aria-label="Slide 9: Quando não sabe, a IA pode inventar. Com toda a confiança.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="alucinacao" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">Alucinação</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1;width:1664px">Quando não sabe, a IA pode inventar. Com toda a confiança.</h2>
+<p style="position:absolute;left:128px;top:360px;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8A5A00">Como o mercado ataca</p>
+<div style="position:absolute;left:128px;top:412px;width:780px;display:flex;flex-direction:column;gap:12px">
+<div data-build-in="rise order 1" style="display:flex;flex-direction:row;align-items:center;gap:24px;background:#F3EBDC;border-radius:20px;padding:12px 28px"><p style="font-family:'Fraunces', Georgia, serif;font-size:40px;font-weight:700;color:#8A5A00;width:40px">1</p><div><p style="font-size:30px;font-weight:700">Ancorar em fontes</p><p style="font-size:22px;color:#5A5248">Buscar na web e na base da empresa antes de responder</p></div></div>
+<div data-build-in="rise order 2" style="display:flex;flex-direction:row;align-items:center;gap:24px;background:#F3EBDC;border-radius:20px;padding:12px 28px"><p style="font-family:'Fraunces', Georgia, serif;font-size:40px;font-weight:700;color:#8A5A00;width:40px">2</p><div><p style="font-size:30px;font-weight:700">Mostrar de onde veio</p><p style="font-size:22px;color:#5A5248">Citações para você conferir</p></div></div>
+<div data-build-in="rise order 3" style="display:flex;flex-direction:row;align-items:center;gap:24px;background:#F3EBDC;border-radius:20px;padding:12px 28px"><p style="font-family:'Fraunces', Georgia, serif;font-size:40px;font-weight:700;color:#8A5A00;width:40px">3</p><div><p style="font-size:30px;font-weight:700">Premiar o “não sei”</p><p style="font-size:22px;color:#5A5248">Errar com confiança passa a valer menos que admitir</p></div></div>
+<div data-build-in="rise order 4" style="display:flex;flex-direction:row;align-items:center;gap:24px;background:#1C1A17;border-radius:20px;padding:12px 28px"><p style="font-family:'Fraunces', Georgia, serif;font-size:40px;font-weight:700;color:#F2B705;width:40px">4</p><div><p style="font-size:30px;font-weight:700;color:#F6F0E4">Conferir antes de decidir</p><p style="font-size:22px;color:#CFC6B8">Verificação automática e um humano no circuito</p></div></div>
+</div>
+<p style="position:absolute;left:980px;top:360px;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8A5A00">A tendência: cada versão erra menos</p>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:960px;top:400px;width:832px;height:440px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#1C1A17}
+.base{position:absolute;left:20px;right:20px;bottom:96px;height:3px;background:#CFC6B8}
+.bar{position:absolute;bottom:99px;width:130px;height:0;border-radius:10px 10px 0 0;animation:up 1.4s cubic-bezier(.2,.8,.2,1) forwards}
+.bar::after{content:&quot;&quot;;position:absolute;left:0;right:0;top:0;height:14px;border-radius:10px 10px 0 0;background:rgba(255,255,255,.35)}
+.v{position:absolute;width:190px;text-align:center;font-size:38px;font-weight:800;opacity:0;animation:fade .5s ease-out forwards}
+.n{position:absolute;bottom:20px;width:190px;text-align:center;font-size:22px;font-weight:700;line-height:1.2;color:#5A5248}
+.trend{position:absolute;left:0;top:0;width:832px;height:440px;opacity:0;animation:fade .8s ease-out 3.6s forwards}
+.trend path{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.6s ease-out 3.6s forwards}
+@keyframes fade{to{opacity:1}}@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes h1{to{height:260px}}@keyframes h2{to{height:180px}}@keyframes h3{to{height:125px}}@keyframes h4{to{height:65px}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;base&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;bar&quot; style=&quot;left:60px;background:#8A8172;animation-name:h1&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;bar&quot; style=&quot;left:260px;background:#C99307;animation-name:h2;animation-delay:.7s&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;bar&quot; style=&quot;left:460px;background:#E0A800;animation-name:h3;animation-delay:1.4s&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;bar&quot; style=&quot;left:660px;background:#F2B705;animation-name:h4;animation-delay:2.1s&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;v&quot; style=&quot;left:30px;bottom:371px;animation-delay:1.2s;font-size:28px;color:#5A5248&quot;&gt;base&lt;/div&gt;
+&lt;div class=&quot;v&quot; style=&quot;left:230px;bottom:291px;animation-delay:1.9s;color:#8A5A00&quot;&gt;−45%&lt;/div&gt;
+&lt;div class=&quot;v&quot; style=&quot;left:430px;bottom:236px;animation-delay:2.6s;color:#8A5A00&quot;&gt;−27%&lt;/div&gt;
+&lt;div class=&quot;v&quot; style=&quot;left:630px;bottom:176px;animation-delay:3.3s;color:#8A5A00&quot;&gt;−52%&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:30px&quot;&gt;GPT-4o&lt;br&gt;2024&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:230px&quot;&gt;GPT-5&lt;br&gt;ago. 2025&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:430px&quot;&gt;GPT-5.3 Instant&lt;br&gt;mar. 2026&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:630px&quot;&gt;GPT-5.5 Instant&lt;br&gt;mai. 2026&lt;/div&gt;
+&lt;svg class=&quot;trend&quot; viewBox=&quot;0 0 832 440&quot;&gt;&lt;path d=&quot;M125 10 C 260 60, 420 120, 560 150 S 720 195, 810 205&quot; fill=&quot;none&quot; stroke=&quot;#1C1A17&quot; stroke-width=&quot;4&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;12 12&quot;/&gt;&lt;/svg&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p style="position:absolute;left:980px;top:850px;width:812px;font-size:22px;line-height:1.3;color:#5A5248">Erros factuais a cada lançamento, contra a versão anterior. Dados da própria OpenAI. Ilustrativo.</p>
+<p style="position:absolute;left:128px;top:852px;width:780px;font-size:22px;line-height:1.3;color:#5A5248"><b style="color:#8A5A00">Contraponto:</b> chatbots repetiram notícias falsas em 35% das respostas em agosto de 2025, contra 18% um ano antes (NewsGuard).</p>
+<p data-build-in="fade" style="position:absolute;left:128px;top:950px;width:1664px;font-family:'Fraunces', Georgia, serif;font-size:42px;font-weight:600;line-height:1.2">A alucinação está caindo. <span style="color:#8A5A00">A responsabilidade de conferir continua humana.</span></p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">09</span><span>Quando não sabe, a IA pode inventar. Com toda a confiança.</span></p>
+</article>
+<article class="card" id="slide-10" aria-label="Slide 10: De aprender a ver até agir sozinha">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="marcos" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Os marcos</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">De aprender a ver até agir sozinha</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:340px;width:1664px;height:600px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#F6F0E4}
+.line{position:absolute;left:40px;top:298px;height:6px;width:0;border-radius:3px;background:linear-gradient(90deg,#5A5248,#C99307 55%,#F2B705);animation:grow 5.4s linear forwards}
+@keyframes grow{to{width:1584px}}
+.n{position:absolute;width:250px;margin-left:-125px;text-align:center;opacity:0;animation:pop .6s ease-out forwards}
+.n .d{position:absolute;left:50%;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:#F2B705;box-shadow:0 0 0 8px rgba(242,183,5,.18)}
+.up{bottom:302px}.up .d{bottom:-15px}.up .c{padding-bottom:36px}
+.dn{top:288px}.dn .d{top:-2px}.dn .c{padding-top:44px}
+.y{font-size:34px;font-weight:800;color:#F2B705}
+.t{font-size:22px;line-height:1.25;margin-top:4px;color:#E9E1D3}
+.hot .y{color:#FFE48A}.hot .d{width:40px;height:40px;margin-left:-20px;box-shadow:0 0 0 12px rgba(242,183,5,.25)}
+.up.hot .d{bottom:-22px}.dn.hot .d{top:-9px}
+@keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;n up&quot; style=&quot;left:125px;animation-delay:0.2s&quot;&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;2012&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;A IA aprende a ver imagens&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n dn&quot; style=&quot;left:266px;animation-delay:0.67s&quot;&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;2016&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;AlphaGo vence o campeão mundial de Go&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n up&quot; style=&quot;left:407px;animation-delay:1.14s&quot;&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;2017&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;Nasce o Transformer, a base dos modelos atuais&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n dn hot&quot; style=&quot;left:548px;animation-delay:1.61s&quot;&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;nov. 2022&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;ChatGPT: 100 milhões de usuários em 2 meses&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n up&quot; style=&quot;left:689px;animation-delay:2.08s&quot;&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;2023&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;GPT-4 passa em provas difíceis&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n dn&quot; style=&quot;left:830px;animation-delay:2.55s&quot;&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;2024&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;IA que raciocina e Nobel para pioneiros da IA&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n up&quot; style=&quot;left:971px;animation-delay:3.02s&quot;&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;jan. 2025&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;DeepSeek: Nvidia perde US$ 589 bi em um dia&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n dn&quot; style=&quot;left:1112px;animation-delay:3.49s&quot;&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;fev. 2025&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;Claude Code, da Anthropic: começa a era dos agentes&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n up&quot; style=&quot;left:1253px;animation-delay:3.96s&quot;&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;out. 2025&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;Nvidia, a primeira empresa de US$ 5 trilhões&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n dn hot&quot; style=&quot;left:1394px;animation-delay:4.43s&quot;&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;set. 2026&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;1,2 bilhão de pessoas por semana no ChatGPT&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;n up&quot; style=&quot;left:1535px;animation-delay:4.9s&quot;&gt;&lt;div class=&quot;c&quot;&gt;&lt;div class=&quot;y&quot;&gt;out. 2026&lt;/div&gt;&lt;div class=&quot;t&quot;&gt;Anthropic pede IPO na Nasdaq. Valor e data ainda em aberto.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">10</span><span>De aprender a ver até agir sozinha</span></p>
+</article>
+<article class="card" id="slide-11" aria-label="Slide 11: Nunca se investiu tanto em uma tecnologia">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="escala" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">O tamanho da aposta</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Nunca se investiu tanto em uma tecnologia</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:330px;width:820px;height:620px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#1C1A17}
+.bar{position:absolute;bottom:90px;width:170px;height:0;animation:up 1.8s cubic-bezier(.2,.8,.2,1) forwards}
+.f,.s,.tp{position:absolute}
+.f{inset:0;border-radius:4px}
+.s{top:0;right:-50px;width:50px;height:100%;transform:skewY(-30deg);transform-origin:left top}
+.tp{left:0;top:-29px;width:170px;height:29px;transform:skewX(-60deg);transform-origin:left bottom}
+.a .f{background:linear-gradient(180deg,#8A8172,#5A5248)}.a .s{background:#3B3630}.a .tp{background:#B3AA9A}
+.b .f{background:linear-gradient(180deg,#FFD04A,#F2B705)}.b .s{background:#B88A04}.b .tp{background:#FFE48A}
+.v{position:absolute;width:290px;text-align:center;font-size:44px;font-weight:800;opacity:0;animation:fade .6s ease-out forwards}
+.y{position:absolute;bottom:30px;font-size:30px;font-weight:700;color:#5A5248}
+@keyframes fade{to{opacity:1}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;bar a&quot; style=&quot;left:170px;animation-name:upa&quot;&gt;&lt;div class=&quot;f&quot;&gt;&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;&lt;/div&gt;&lt;div class=&quot;tp&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;bar b&quot; style=&quot;left:470px;animation-name:upb;animation-delay:.6s&quot;&gt;&lt;div class=&quot;f&quot;&gt;&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;&lt;/div&gt;&lt;div class=&quot;tp&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;v&quot; style=&quot;left:135px;bottom:380px;animation-delay:1.6s&quot;&gt;US$ 410 bi&lt;/div&gt;
+&lt;div class=&quot;v&quot; style=&quot;left:435px;bottom:545px;animation-delay:2.4s;color:#8A5A00&quot;&gt;US$ 700 bi+&lt;/div&gt;
+&lt;div class=&quot;y&quot; style=&quot;left:244px&quot;&gt;2025&lt;/div&gt;&lt;div class=&quot;y&quot; style=&quot;left:544px&quot;&gt;2026&lt;/div&gt;
+&lt;style&gt;@keyframes upa{to{height:230px}}@keyframes upb{to{height:395px}}&lt;/style&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p style="position:absolute;left:128px;top:960px;width:820px;font-size:24px;color:#5A5248">Microsoft, Alphabet, Amazon e Meta em data centers e IA, por ano</p>
+<div style="position:absolute;left:1010px;top:340px;width:782px;display:flex;flex-direction:column;gap:22px">
+<div data-build-in="rise order 1" style="background:#F3EBDC;border-radius:24px;padding:26px 36px"><p style="font-family:'Fraunces', Georgia, serif;font-size:60px;font-weight:700;color:#8A5A00;line-height:1.05">US$ 500 bi</p><p style="font-size:28px;font-weight:700">Stargate, a infraestrutura de IA dos EUA</p></div>
+<div data-build-in="rise order 2" style="background:#F3EBDC;border-radius:24px;padding:26px 36px"><p style="font-family:'Fraunces', Georgia, serif;font-size:60px;font-weight:700;color:#8A5A00;line-height:1.05">US$ 965 bi</p><p style="font-size:28px;font-weight:700">Anthropic na rodada de maio. O IPO de novembro entrou em dúvida.</p></div>
+<div data-build-in="rise order 3" style="background:#1C1A17;border-radius:24px;padding:26px 36px"><p style="font-family:'Fraunces', Georgia, serif;font-size:60px;font-weight:700;color:#F2B705;line-height:1.05">18,8%</p><p style="font-size:28px;font-weight:700;color:#F6F0E4">do mundo em idade de trabalhar já usa IA. Nos Emirados, 73%.</p></div>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">11</span><span>Nunca se investiu tanto em uma tecnologia</span></p>
+</article>
+<article class="card" id="slide-12" aria-label="Slide 12: Quem está moldando a IA, e o que cada um defende">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="lideres" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Os protagonistas</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Quem está moldando a IA, e o que cada um defende</h2>
+<div style="position:absolute;left:128px;top:580px;width:1664px;height:48px;border-radius:24px;background:linear-gradient(90deg, #F2B705, #C99307 45%, #6E675C 100%);display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0px 24px"><p style="font-size:24px;font-weight:700;color:#1C1A17">ACELERAR</p><p style="font-size:24px;font-weight:700;color:#F6F0E4">ALERTAR</p></div>
+<div data-build-in="rise order 1 auto" style="position:absolute;left:128px;top:384px;width:240px;height:180px;display:flex;flex-direction:column;justify-content:end;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Elon Musk</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">Tesla, SpaceX e xAI</p><p style="font-size:24px;color:#F2B705">Acelerar</p></div>
+<div data-build-in="rise order 2 auto" style="position:absolute;left:334px;top:648px;width:240px;height:180px;display:flex;flex-direction:column;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Sam Altman</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">OpenAI</p><p style="font-size:24px;color:#F2B705">Acelerar</p></div>
+<div data-build-in="rise order 3 auto" style="position:absolute;left:540px;top:384px;width:240px;height:180px;display:flex;flex-direction:column;justify-content:end;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Jensen Huang</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">Nvidia</p><p style="font-size:24px;color:#F2B705">Adotar</p></div>
+<div data-build-in="rise order 4 auto" style="position:absolute;left:746px;top:648px;width:240px;height:180px;display:flex;flex-direction:column;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Satya Nadella</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">Microsoft</p><p style="font-size:24px;color:#F2B705">Amplificar</p></div>
+<div data-build-in="rise order 5 auto" style="position:absolute;left:952px;top:384px;width:240px;height:180px;display:flex;flex-direction:column;justify-content:end;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Demis Hassabis</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">Google DeepMind</p><p style="font-size:24px;color:#E0C37A">Equilíbrio</p></div>
+<div data-build-in="rise order 6 auto" style="position:absolute;left:1158px;top:648px;width:240px;height:180px;display:flex;flex-direction:column;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Dario Amodei</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">Anthropic</p><p style="font-size:24px;color:#E0C37A">Cautela</p></div>
+<div data-build-in="rise order 7 auto" style="position:absolute;left:1364px;top:384px;width:240px;height:180px;display:flex;flex-direction:column;justify-content:end;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Fei-Fei Li</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">World Labs e Stanford</p><p style="font-size:24px;color:#CFC6B8">Humanismo</p></div>
+<div data-build-in="rise order 8 auto" style="position:absolute;left:1552px;top:648px;width:240px;height:180px;display:flex;flex-direction:column;gap:6px;background:#2A2620;border-radius:16px;padding:16px"><p style="font-size:28px;font-weight:700;line-height:1.1">Geoffrey Hinton</p><p style="font-size:22px;line-height:1.2;color:#CFC6B8">Univ. de Toronto</p><p style="font-size:24px;color:#CFC6B8">Alerta</p></div>
+<p data-build-in="fade order 9 auto" style="position:absolute;left:128px;top:850px;width:1664px;font-size:26px;color:#CFC6B8">Fora do eixo, <b>Yann LeCun</b> (AMI Labs, ex-Meta): ceticismo. Para ele, só modelos de linguagem não chegam à inteligência humana.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">12</span><span>Quem está moldando a IA, e o que cada um defende</span></p>
+</article>
+<article class="card" id="slide-13" aria-label="Slide 13: Quatro frases para pensar">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="frases" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">O que eles dizem</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Quatro frases para pensar</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:column;gap:16px;background:#F3EBDC;padding:36px 40px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-style:italic;line-height:1.3">“Você não vai perder o emprego para uma IA, mas para alguém que usa IA.”</p><p style="font-size:24px;font-weight:700;color:#8A5A00">Jensen Huang, Nvidia · maio 2025</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:36px 40px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-style:italic;line-height:1.3;color:#F6F0E4">“Há partes da vida que não podemos e não devemos automatizar.”</p><p style="font-size:24px;font-weight:700;color:#F2B705">Sam Altman, OpenAI · set. 2026</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#F3EBDC;padding:36px 40px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-style:italic;line-height:1.3">“A maioria das pessoas está subestimando o quão radical pode ser o lado bom da IA.”</p><p style="font-size:24px;font-weight:700;color:#8A5A00">Dario Amodei, Anthropic · out. 2024</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#F3EBDC;padding:36px 40px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-style:italic;line-height:1.3">“Hoje, a principal preocupação delas não é o nosso bem-estar. É atingir o objetivo que você der.”</p><p style="font-size:24px;font-weight:700;color:#8A5A00">Geoffrey Hinton · set. 2026</p></div>
+</div>
+<p style="font-size:24px;color:#5A5248">Traduções livres.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">13</span><span>Quatro frases para pensar</span></p>
+</article>
+<article class="card" id="slide-14" aria-label="Slide 14: Uma corrida entre países, não só entre empresas">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="geopolitica" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="position:absolute;left:128px;top:96px;width:1664px;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Geopolítica da IA</p>
+<h2 style="position:absolute;left:128px;top:138px;width:1664px;font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:600;line-height:1.1">Uma corrida entre países, não só entre empresas</h2>
+<img loading="lazy" decoding="async" src="assets/mapa-mundi.png" alt="Mapa-múndi em pontos, com o Brasil destacado" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:230px;width:1664px;height:720px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+svg{position:absolute;inset:0}
+.c{stroke:rgba(242,183,5,.45);stroke-width:2;stroke-dasharray:4 6}
+.a{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 7s ease-in-out infinite}
+.s{stroke:#F2B705}.b{stroke:#FFE48A;stroke-width:2.5;opacity:.85}
+@keyframes draw{0%{stroke-dashoffset:1400;opacity:0}5%{opacity:1}35%,80%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.m{position:absolute;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px #F2B705;offset-rotate:0deg;opacity:0;animation:fly 7s ease-in-out infinite}
+@keyframes fly{0%{offset-distance:0%;opacity:0}5%{opacity:1}35%{offset-distance:100%;opacity:1}40%,100%{offset-distance:100%;opacity:0}}
+.k{position:absolute;width:0;height:0}
+.k b{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#F2B705;box-shadow:0 0 16px 4px rgba(242,183,5,.7)}
+.k span{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;border:3px solid #F2B705;box-sizing:border-box;animation:ping 2.4s ease-out infinite}
+.kb b{left:-14px;top:-14px;width:28px;height:28px;background:#FFE48A}
+.kb span{left:-14px;top:-14px;width:28px;height:28px;border-color:#FFE48A;animation-duration:1.6s}
+@keyframes ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(4);opacity:0}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg width=&quot;1664&quot; height=&quot;720&quot; viewBox=&quot;0 0 1664 720&quot;&gt;&lt;line class=&quot;c&quot; x1=&quot;333&quot; y1=&quot;206&quot; x2=&quot;333&quot; y2=&quot;290&quot;/&gt;&lt;line class=&quot;c&quot; x1=&quot;832&quot; y1=&quot;156&quot; x2=&quot;762&quot; y2=&quot;110&quot;/&gt;&lt;line class=&quot;c&quot; x1=&quot;1271&quot; y1=&quot;225&quot; x2=&quot;1300&quot; y2=&quot;181&quot;/&gt;&lt;line class=&quot;c&quot; x1=&quot;1035&quot; y1=&quot;276&quot; x2=&quot;1035&quot; y2=&quot;530&quot;/&gt;&lt;line class=&quot;c&quot; x1=&quot;545&quot; y1=&quot;442&quot; x2=&quot;420&quot; y2=&quot;600&quot;/&gt;&lt;path class=&quot;a s&quot; d=&quot;M333 206 Q 800 150 1271 225&quot; style=&quot;animation-delay:0s&quot;/&gt;&lt;path class=&quot;a s&quot; d=&quot;M333 206 Q 700 330 1035 276&quot; style=&quot;animation-delay:1.2s&quot;/&gt;&lt;path class=&quot;a b&quot; d=&quot;M545 442 Q 380 360 333 206&quot; style=&quot;animation-delay:2.4s&quot;/&gt;&lt;path class=&quot;a b&quot; d=&quot;M545 442 Q 640 230 832 156&quot; style=&quot;animation-delay:3.0s&quot;/&gt;&lt;path class=&quot;a b&quot; d=&quot;M545 442 Q 800 420 1035 276&quot; style=&quot;animation-delay:3.6s&quot;/&gt;&lt;path class=&quot;a b&quot; d=&quot;M545 442 Q 950 520 1271 225&quot; style=&quot;animation-delay:4.2s&quot;/&gt;&lt;/svg&gt;&lt;i class=&quot;m&quot; style=&quot;offset-path:path(&#x27;M333 206 Q 800 150 1271 225&#x27;);animation-delay:0.3s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;m&quot; style=&quot;offset-path:path(&#x27;M333 206 Q 700 330 1035 276&#x27;);animation-delay:1.5s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;m&quot; style=&quot;offset-path:path(&#x27;M545 442 Q 380 360 333 206&#x27;);animation-delay:2.6999999999999997s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;m&quot; style=&quot;offset-path:path(&#x27;M545 442 Q 640 230 832 156&#x27;);animation-delay:3.3s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;m&quot; style=&quot;offset-path:path(&#x27;M545 442 Q 800 420 1035 276&#x27;);animation-delay:3.9s&quot;&gt;&lt;/i&gt;&lt;i class=&quot;m&quot; style=&quot;offset-path:path(&#x27;M545 442 Q 950 520 1271 225&#x27;);animation-delay:4.5s&quot;&gt;&lt;/i&gt;&lt;div class=&quot;k&quot; style=&quot;left:333px;top:206px&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;k&quot; style=&quot;left:832px;top:156px&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;k&quot; style=&quot;left:1035px;top:276px&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;k&quot; style=&quot;left:1271px;top:225px&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;k kb&quot; style=&quot;left:545px;top:442px&quot;&gt;&lt;b&gt;&lt;/b&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<div data-build-in="rise order 1 auto" style="position:absolute;width:420px;box-sizing:border-box;background:rgba(28,26,23,0.92);border:1px solid rgba(242,183,5,0.35);border-radius:18px;padding:20px 26px;box-shadow:0px 16px 40px rgba(0,0,0,0.45);left:128px;top:520px"><p style="font-size:30px;font-weight:800;color:#F2B705">Estados Unidos</p><p style="font-size:24px;line-height:1.3;margin-top:6px">Controlam os chips. Liberaram alguns para a China, com 25% da receita para o governo.</p></div>
+<div data-build-in="rise order 2 auto" style="position:absolute;width:420px;box-sizing:border-box;background:rgba(28,26,23,0.92);border:1px solid rgba(242,183,5,0.35);border-radius:18px;padding:20px 26px;box-shadow:0px 16px 40px rgba(0,0,0,0.45);left:1372px;top:235px"><p style="font-size:30px;font-weight:800;color:#F2B705">China</p><p style="font-size:24px;line-height:1.3;margin-top:6px">Aposta em chips próprios e modelos abertos, que já lideram em downloads.</p></div>
+<div data-build-in="rise order 3 auto" style="position:absolute;width:420px;box-sizing:border-box;background:rgba(28,26,23,0.92);border:1px solid rgba(242,183,5,0.35);border-radius:18px;padding:20px 26px;box-shadow:0px 16px 40px rgba(0,0,0,0.45);left:960px;top:760px"><p style="font-size:30px;font-weight:800;color:#F2B705">Emirados</p><p style="font-size:24px;line-height:1.3;margin-top:6px">Viraram ponte: um campus de IA gigante com parceiros americanos.</p></div>
+<div data-build-in="rise order 4 auto" style="position:absolute;width:420px;box-sizing:border-box;background:rgba(28,26,23,0.92);border:1px solid rgba(242,183,5,0.35);border-radius:18px;padding:20px 26px;box-shadow:0px 16px 40px rgba(0,0,0,0.45);left:470px;top:235px"><p style="font-size:30px;font-weight:800;color:#F2B705">Europa</p><p style="font-size:24px;line-height:1.3;margin-top:6px">Escolheu regular primeiro: lei de IA em vigor desde 2024.</p></div>
+<div data-build-in="rise order 5 auto" style="position:absolute;left:128px;top:760px;width:420px;box-sizing:border-box;background:#F2B705;color:#1C1A17;border-radius:18px;padding:20px 26px;box-shadow:0px 16px 40px rgba(0,0,0,0.45)"><p style="font-size:30px;font-weight:800">E o Brasil?</p><p style="font-size:24px;line-height:1.3;margin-top:6px">Plano de R$ 23 bi, lei nova para data centers e regras de IA ainda em debate.</p></div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">14</span><span>Uma corrida entre países, não só entre empresas</span></p>
+</article>
+<article class="card" id="slide-15" aria-label="Slide 15: A mesma ferramenta, dois futuros">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="dois-lados" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">Os dois lados</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">A mesma ferramenta, dois futuros</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:810px;top:330px;width:300px;height:220px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+.post{position:absolute;left:144px;top:40px;width:12px;height:160px;background:#1C1A17;border-radius:6px}
+.base{position:absolute;left:95px;top:196px;width:110px;height:14px;background:#1C1A17;border-radius:7px}
+.beam{position:absolute;left:20px;top:36px;width:260px;height:10px;background:#1C1A17;border-radius:5px;transform-origin:50% 50%;animation:rock 4s ease-in-out infinite}
+.pan{position:absolute;top:8px;width:80px;height:80px}
+.pan i{position:absolute;left:39px;top:0;width:2px;height:50px;background:#1C1A17}
+.pan b{position:absolute;left:0;top:50px;width:80px;height:24px;border-radius:0 0 40px 40px}
+.l{left:-38px}.r{right:-38px}
+.l b{background:#F2B705}.r b{background:#5A5248}
+.l,.r{animation:counter 4s ease-in-out infinite;transform-origin:40px 0}
+@keyframes rock{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes counter{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-8deg)}}
+.top{position:absolute;left:138px;top:28px;width:24px;height:24px;border-radius:50%;background:#F2B705}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;post&quot;&gt;&lt;/div&gt;&lt;div class=&quot;base&quot;&gt;&lt;/div&gt;&lt;div class=&quot;beam&quot;&gt;&lt;div class=&quot;pan l&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;pan r&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;top&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<div style="position:absolute;left:128px;top:580px;width:780px;display:flex;flex-direction:column;gap:18px">
+<p style="font-size:36px;font-weight:800;color:#8A5A00">O potencial</p>
+<p data-build-in="rise order 1" style="font-size:30px;line-height:1.3;background:#F3EBDC;border-radius:20px;padding:18px 28px"><b>+170 milhões</b> de empregos novos até 2030</p>
+<p data-build-in="rise order 2" style="font-size:30px;line-height:1.3;background:#F3EBDC;border-radius:20px;padding:18px 28px"><b>+62%</b> de salário para quem domina IA</p>
+<p data-build-in="rise order 3" style="font-size:30px;line-height:1.3;background:#F3EBDC;border-radius:20px;padding:18px 28px"><b>34% vs 24%</b> de ganho de produtividade</p>
+</div>
+<div style="position:absolute;left:1012px;top:580px;width:780px;display:flex;flex-direction:column;gap:18px">
+<p style="font-size:36px;font-weight:800">Os riscos</p>
+<p data-build-in="rise order 4" style="font-size:30px;line-height:1.3;background:#1C1A17;color:#F6F0E4;border-radius:20px;padding:18px 28px"><b style="color:#F2B705">92 milhões</b> de empregos deslocados até 2030</p>
+<p data-build-in="rise order 5" style="font-size:30px;line-height:1.3;background:#1C1A17;color:#F6F0E4;border-radius:20px;padding:18px 28px"><b style="color:#F2B705">−13%</b> de vagas para jovens de 22 a 25 anos</p>
+<p data-build-in="rise order 6" style="font-size:30px;line-height:1.3;background:#1C1A17;color:#F6F0E4;border-radius:20px;padding:18px 28px"><b style="color:#F2B705">2x</b> mais energia nos data centers até 2030</p>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">15</span><span>A mesma ferramenta, dois futuros</span></p>
+</article>
+<article class="card" id="slide-16" aria-label="Slide 16: A distância cresce a cada dia">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="k-shape" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">A economia em K</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">A distância cresce a cada dia</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:320px;width:1100px;height:620px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#F6F0E4}
+svg{position:absolute;inset:0}
+.ax{stroke:#4A443B;stroke-width:3}
+.p{fill:none;stroke-linecap:round;stroke-width:10;stroke-dasharray:900;stroke-dashoffset:900}
+.t{animation:d 1.4s ease-out forwards}
+.u{animation:d 2s ease-out 1.4s forwards}
+.w{animation:d 2s ease-out 1.6s forwards}
+@keyframes d{to{stroke-dashoffset:0}}
+.gap{fill:url(#gg);opacity:0;animation:f 1.2s ease-out 3.4s forwards}
+.lab{position:absolute;font-size:34px;font-weight:800;opacity:0;animation:f .8s ease-out forwards}
+.s{display:block;font-size:24px;font-weight:600;color:#CFC6B8;margin-top:4px}
+@keyframes f{to{opacity:1}}
+.arrow{position:absolute;left:830px;top:200px;width:6px;height:0;background:#F2B705;opacity:.0;animation:grow 1.4s ease-out 3.8s forwards}
+@keyframes grow{to{height:300px;top:170px;opacity:.9}}
+.gl{position:absolute;left:850px;top:300px;font-size:28px;font-weight:800;color:#F2B705;opacity:0;animation:f .8s ease-out 4.4s forwards}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;svg width=&quot;1100&quot; height=&quot;620&quot; viewBox=&quot;0 0 1100 620&quot;&gt;
+&lt;defs&gt;&lt;linearGradient id=&quot;gg&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#F2B705&quot; stop-opacity=&quot;.25&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#8A8172&quot; stop-opacity=&quot;.12&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;
+&lt;line class=&quot;ax&quot; x1=&quot;40&quot; y1=&quot;580&quot; x2=&quot;1060&quot; y2=&quot;580&quot;/&gt;&lt;line class=&quot;ax&quot; x1=&quot;40&quot; y1=&quot;40&quot; x2=&quot;40&quot; y2=&quot;580&quot;/&gt;
+&lt;path class=&quot;gap&quot; d=&quot;M420 330 C 600 300, 760 200, 1000 70 L 1000 540 C 760 470, 600 380, 420 330 Z&quot;/&gt;
+&lt;path class=&quot;p t&quot; d=&quot;M60 360 C 200 350, 320 340, 420 330&quot; stroke=&quot;#CFC6B8&quot;/&gt;
+&lt;path class=&quot;p u&quot; d=&quot;M420 330 C 600 300, 760 200, 1000 70&quot; stroke=&quot;#F2B705&quot;/&gt;
+&lt;path class=&quot;p w&quot; d=&quot;M420 330 C 600 380, 760 470, 1000 540&quot; stroke=&quot;#8A8172&quot;/&gt;
+&lt;/svg&gt;
+&lt;div class=&quot;lab&quot; style=&quot;left:70px;top:250px;animation-delay:.6s&quot;&gt;Todos juntos&lt;span class=&quot;s&quot;&gt;até pouco tempo&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;lab&quot; style=&quot;left:700px;top:20px;color:#F2B705;animation-delay:2.6s&quot;&gt;Quem domina a IA&lt;/div&gt;
+&lt;div class=&quot;lab&quot; style=&quot;left:520px;top:500px;color:#CFC6B8;animation-delay:2.8s&quot;&gt;Quem nega a IA&lt;/div&gt;
+&lt;div class=&quot;arrow&quot;&gt;&lt;/div&gt;&lt;div class=&quot;gl&quot;&gt;o GAP&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<div style="position:absolute;left:1270px;top:340px;width:522px;display:flex;flex-direction:column;gap:22px">
+<div data-build-in="rise order 1" style="background:#2A2620;border-radius:24px;padding:24px 32px"><p style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:700;color:#F2B705;line-height:1.05">+62%</p><p style="font-size:26px;font-weight:700">de salário para quem tem habilidades de IA</p></div>
+<div data-build-in="rise order 2" style="background:#2A2620;border-radius:24px;padding:24px 32px"><p style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:700;color:#F2B705;line-height:1.05">69% vs 9%</p><p style="font-size:26px;font-weight:700">crescimento das vagas que pedem IA, contra o total</p></div>
+<div data-build-in="rise order 3" style="background:#2A2620;border-radius:24px;padding:24px 32px"><p style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:700;color:#F2B705;line-height:1.05">29% vs 16%</p><p style="font-size:26px;font-weight:700">uso de IA nos países ricos e nos países em desenvolvimento</p></div>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">16</span><span>A distância cresce a cada dia</span></p>
+</article>
+<article class="card" id="slide-17" aria-label="Slide 17: Como ser MASTERS em IA">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="masters" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">Na prática</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Como ser MASTERS em IA</h2>
+<div style="display:grid;grid-template-columns:repeat(7, 1fr);gap:16px">
+<div style="display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:32px 14px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:700;line-height:1;color:#F2B705">M</p><p style="font-size:28px;font-weight:700;color:#F6F0E4">Mentalidade de aprendiz</p><p style="font-size:24px;color:#CFC6B8">Use todos os dias</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:32px 14px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:700;line-height:1;color:#F2B705">A</p><p style="font-size:28px;font-weight:700;color:#F6F0E4">Automatize</p><p style="font-size:24px;color:#CFC6B8">Uma tarefa por semana</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:32px 14px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:700;line-height:1;color:#F2B705">S</p><p style="font-size:28px;font-weight:700;color:#F6F0E4">Saiba perguntar</p><p style="font-size:24px;color:#CFC6B8">Contexto, objetivo, formato</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:32px 14px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:700;line-height:1;color:#F2B705">T</p><p style="font-size:28px;font-weight:700;color:#F6F0E4">Teste</p><p style="font-size:24px;color:#CFC6B8">Compare ferramentas</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:32px 14px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:700;line-height:1;color:#F2B705">E</p><p style="font-size:28px;font-weight:700;color:#F6F0E4">Ética</p><p style="font-size:24px;color:#CFC6B8">Cheque antes de assinar</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:32px 14px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:700;line-height:1;color:#F2B705">R</p><p style="font-size:28px;font-weight:700;color:#F6F0E4">Rede</p><p style="font-size:24px;color:#CFC6B8">Aprenda em comunidade</p></div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#F2B705;padding:32px 14px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:700;line-height:1;color:#1C1A17">S</p><p style="font-size:28px;font-weight:700;color:#1C1A17">Seu propósito</p><p style="font-size:24px;color:#1C1A17">No centro de tudo</p></div>
+</div>
+<p style="font-size:32px;color:#5A5248;width:1500px">Dominar a IA não é saber tudo. É praticar um pouco todos os dias.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">17</span><span>Como ser MASTERS em IA</span></p>
+</article>
+<article class="card" id="slide-18" aria-label="Slide 18: 02 · Propósito não se automatiza">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="parte2" style="background:#0E1030;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<img loading="lazy" decoding="async" src="assets/parte2-amanhecer.jpg" alt="Ilustração de uma pessoa no alto de um morro diante do sol nascendo, com girassóis ao redor e o céu passando da noite para o amanhecer" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<p style="font-family:'Fraunces', Georgia, serif;font-size:200px;font-weight:700;line-height:1;color:#F2B705;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">02</p>
+<h1 style="font-family:'Fraunces', Georgia, serif;font-size:112px;font-weight:700;line-height:1.05;width:1000px;color:#F6F0E4;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">Propósito não se automatiza</h1>
+<p style="font-size:36px;width:900px;line-height:1.4;color:#EFE7D8;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">Agora que a gente viu o poder da IA, vamos falar do que ela não faz por você.</p>
+<img loading="lazy" decoding="async" src="assets/logo-sunflower.png" alt="Logo Sunflower" style="position:absolute;left:1472px;top:912px;width:320px;height:81px;object-fit:contain">
+</section>
+
+</div></div>
+<p class="cap"><span class="num">18</span><span>02 · Propósito não se automatiza</span></p>
+</article>
+<article class="card" id="slide-19" aria-label="Slide 19: A IA nos devolve tempo. E a gente nunca trabalhou tanto.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="paradoxo" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">O paradoxo</p>
+<h1 style="font-family:'Fraunces', Georgia, serif;font-size:96px;font-weight:600;line-height:1.1;width:1500px">A IA nos devolve tempo. E a gente nunca trabalhou tanto.</h1>
+<div style="display:flex;gap:32px">
+<p data-text style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:600;font-style:italic;color:#F2B705">Mais… para quê?</p>
+</div>
+<p style="font-size:36px;color:#CFC6B8;width:1400px">Eu sirvo a ferramenta, ou a ferramenta me serve?</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">19</span><span>A IA nos devolve tempo. E a gente nunca trabalhou tanto.</span></p>
+</article>
+<article class="card" id="slide-20" aria-label="Slide 20: Para escrever, eu tive que voltar para a minha própria história.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="livro" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<img loading="lazy" decoding="async" src="assets/livro-proposito.webp" alt="Capa do livro Propósito nos Emirados, de Pedro Pereira" style="position:absolute;left:128px;top:200px;width:620px;height:700px;object-fit:contain">
+<p style="position:absolute;left:840px;top:200px;width:952px;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">O meu livro</p>
+<h2 style="position:absolute;left:840px;top:256px;width:952px;font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Para escrever, eu tive que voltar para a minha própria história.</h2>
+<div style="position:absolute;left:840px;top:600px;width:952px;display:flex;gap:24px">
+<p data-build-in="rise order 1" style="font-size:32px;font-weight:700;background:#1C1A17;color:#F6F0E4;padding:20px 36px;border-radius:999px">Superação</p>
+<p data-build-in="rise order 2" style="font-size:32px;font-weight:700;background:#1C1A17;color:#F6F0E4;padding:20px 36px;border-radius:999px">Resiliência</p>
+<p data-build-in="rise order 3" style="font-size:32px;font-weight:700;background:#F2B705;color:#1C1A17;padding:20px 36px;border-radius:999px">De dentro para fora</p>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">20</span><span>Para escrever, eu tive que voltar para a minha própria história.</span></p>
+</article>
+<article class="card" id="slide-21" aria-label="Slide 21: O dia em que eu quase desisti">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="virada" style="background:#121018;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<img loading="lazy" decoding="async" src="assets/tempestade.jpg" alt="Ilustração de uma tempestade com chuva e raio à esquerda que se abre em amanhecer dourado à direita, com montanhas e uma pessoa caminhando em direção à luz" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">A virada</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">O dia em que eu quase desisti</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:330px;width:1664px;height:560px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#F6F0E4}
+svg{position:absolute;inset:0}
+.path{filter:drop-shadow(0 0 6px rgba(0,0,0,.85));fill:none;stroke:url(#g);stroke-width:12;stroke-linecap:round;stroke-dasharray:2200;stroke-dashoffset:2200;animation:d 4s ease-in-out .3s forwards}
+@keyframes d{to{stroke-dashoffset:0}}
+.base{stroke:#3B3630;stroke-width:2;stroke-dasharray:6 10}
+.pt{opacity:0;animation:f .6s ease-out forwards}
+.low{transform-origin:820px 470px;animation:f .6s ease-out 2s forwards,p 2s ease-in-out 2.6s infinite}
+@keyframes p{0%,100%{r:16}50%{r:26}}
+.ring{fill:none;stroke:#F2B705;stroke-width:3;opacity:0;transform-origin:820px 470px;animation:w 2.4s ease-out 2.6s infinite}
+@keyframes w{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(2.4)}}
+@keyframes f{to{opacity:1}}
+.l{position:absolute;font-size:30px;font-weight:700;text-shadow:0 2px 6px rgba(0,0,0,.95),0 0 18px rgba(0,0,0,.8);opacity:0;animation:f .8s ease-out forwards}
+.l span{display:block;font-size:22px;font-weight:400;color:#EFE7D8;margin-top:4px}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;svg width=&quot;1664&quot; height=&quot;560&quot; viewBox=&quot;0 0 1664 560&quot;&gt;
+&lt;defs&gt;&lt;linearGradient id=&quot;g&quot; x1=&quot;0&quot; x2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#CFC6B8&quot;/&gt;&lt;stop offset=&quot;.45&quot; stop-color=&quot;#6E675C&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#C99307&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#F2B705&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;
+&lt;path class=&quot;path&quot; d=&quot;M40 280 C 260 240, 420 190, 540 200 C 680 215, 700 470, 820 470 C 950 470, 960 300, 1100 250 C 1260 195, 1440 110, 1620 60&quot;/&gt;
+&lt;circle class=&quot;pt&quot; cx=&quot;540&quot; cy=&quot;200&quot; r=&quot;12&quot; fill=&quot;#CFC6B8&quot; style=&quot;animation-delay:1.2s&quot;/&gt;
+&lt;circle class=&quot;ring&quot; cx=&quot;820&quot; cy=&quot;470&quot; r=&quot;20&quot;/&gt;
+&lt;circle class=&quot;pt low&quot; cx=&quot;820&quot; cy=&quot;470&quot; r=&quot;18&quot; fill=&quot;#F2B705&quot;/&gt;
+&lt;circle class=&quot;pt&quot; cx=&quot;1100&quot; cy=&quot;250&quot; r=&quot;12&quot; fill=&quot;#F2B705&quot; style=&quot;animation-delay:3s&quot;/&gt;
+&lt;circle class=&quot;pt&quot; cx=&quot;1620&quot; cy=&quot;60&quot; r=&quot;16&quot; fill=&quot;#F2B705&quot; style=&quot;animation-delay:4.2s&quot;/&gt;
+&lt;/svg&gt;
+&lt;div class=&quot;l&quot; style=&quot;left:420px;top:120px;animation-delay:1.2s&quot;&gt;Tudo parecia certo&lt;/div&gt;
+&lt;div class=&quot;l&quot; style=&quot;left:870px;top:440px;color:#F2B705;animation-delay:2s&quot;&gt;Quase desisti&lt;span&gt;o momento mais difícil&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;l&quot; style=&quot;left:1130px;top:270px;animation-delay:3s&quot;&gt;O que me fez ficar&lt;span&gt;o propósito&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;l&quot; style=&quot;left:1572px;top:92px;color:#F2B705;animation-delay:4.2s&quot;&gt;Hoje&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p data-build-in="fade" style="position:absolute;left:128px;top:910px;width:1664px;font-family:'Fraunces', Georgia, serif;font-size:40px;font-style:italic;color:#F2B705;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">Propósito é o que te faz ficar quando tudo diz para ir embora.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">21</span><span>O dia em que eu quase desisti</span></p>
+</article>
+<article class="card" id="slide-22" aria-label="Slide 22: Inovação de dentro para fora">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="dentro-fora" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Um método de inovação</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Inovação de dentro para fora</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:340px;width:1664px;height:612px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#F6F0E4}
+.wrap{display:flex;height:100%;align-items:center;gap:40px}
+.stage{position:relative;width:620px;height:600px;flex:none}
+.ring{position:absolute;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) scale(.2);opacity:0;display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box}
+.ring span{margin-top:14px;font-size:26px;font-weight:700}
+.r5{width:600px;height:600px;background:#2A2620;border:2px solid #4A443B;animation:grow 1s ease-out 2.4s forwards}
+.r4{width:480px;height:480px;background:#3B3630;animation:grow 1s ease-out 1.8s forwards}
+.r3{width:360px;height:360px;background:#5E4618;animation:grow 1s ease-out 1.2s forwards}
+.r2{width:240px;height:240px;background:#9A7004;animation:grow 1s ease-out .6s forwards}
+.r1{width:130px;height:130px;background:#F2B705;align-items:center;animation:grow 1s ease-out 0s forwards,pulse 2.4s ease-in-out 3.4s infinite}
+.r1 span{margin:0;color:#1C1A17;font-size:24px}
+@keyframes grow{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(242,183,5,.6)}50%{box-shadow:0 0 0 22px rgba(242,183,5,0)}}
+.list{display:flex;flex-direction:column;gap:20px}
+.row{display:flex;gap:20px;align-items:baseline;opacity:0;animation:in .6s ease-out forwards}
+.n{font-size:34px;font-weight:800;color:#F2B705;width:44px}
+.t{font-size:34px;font-weight:700}.d{font-size:26px;color:#CFC6B8}
+@keyframes in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;wrap&quot;&gt;
+&lt;div class=&quot;stage&quot;&gt;&lt;div class=&quot;ring r5&quot;&gt;&lt;span&gt;Impacto&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;ring r4&quot;&gt;&lt;span&gt;Inovação&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;ring r3&quot;&gt;&lt;span&gt;Hábitos&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;ring r2&quot;&gt;&lt;span&gt;Valores&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;ring r1&quot;&gt;&lt;span&gt;Propósito&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;list&quot;&gt;
+&lt;div class=&quot;row&quot; style=&quot;animation-delay:.2s&quot;&gt;&lt;div class=&quot;n&quot;&gt;1&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Propósito&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Por que eu faço o que faço?&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row&quot; style=&quot;animation-delay:.8s&quot;&gt;&lt;div class=&quot;n&quot;&gt;2&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Valores&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;O que eu não negocio?&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row&quot; style=&quot;animation-delay:1.4s&quot;&gt;&lt;div class=&quot;n&quot;&gt;3&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Hábitos&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;O que eu pratico todo dia?&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row&quot; style=&quot;animation-delay:2s&quot;&gt;&lt;div class=&quot;n&quot;&gt;4&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Inovação&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Onde a tecnologia me ajuda a ir mais longe?&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row&quot; style=&quot;animation-delay:2.6s&quot;&gt;&lt;div class=&quot;n&quot;&gt;5&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;t&quot;&gt;Impacto&lt;/div&gt;&lt;div class=&quot;d&quot;&gt;Quem é melhor por causa do meu trabalho?&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">22</span><span>Inovação de dentro para fora</span></p>
+</article>
+<article class="card" id="slide-23" aria-label="Slide 23: O cafezinho que a IA não serve.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="alem" style="background:#1C1A17;color:#FBF7EE;font-family:'DM Sans', Arial, sans-serif;padding:0">
+<img loading="lazy" decoding="async" src="assets/cafezinho.jpg" alt="Ilustração dividida: à esquerda, uma sala de reunião de vidro, fria, com relógio marcando nove horas e a pauta na tela; à direita, uma mesa brasileira com cafezinho, garrafa térmica e pão de queijo" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:1240px;top:470px;width:440px;height:340px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}span{position:absolute;width:28px;height:90px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,250,240,.75),rgba(255,250,240,0) 70%);filter:blur(5px);opacity:0;animation-name:st;animation-timing-function:ease-out;animation-iteration-count:infinite}@keyframes st{0%{opacity:0;transform:translate(0,30px) scale(.5,.6)}25%{opacity:.7}60%{opacity:.4;transform:translate(var(--s),-90px) scale(1.2,1.1) rotate(8deg)}100%{opacity:0;transform:translate(calc(var(--s)*-1),-210px) scale(1.8,1.4) rotate(-10deg)}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;span style=&quot;left:77px;top:202px;--s:-20px;animation-duration:4.1s;animation-delay:0.0s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:77px;top:202px;--s:-20px;animation-duration:3.7s;animation-delay:-0.7s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:89px;top:202px;--s:-15px;animation-duration:5.1s;animation-delay:-2.0s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:89px;top:202px;--s:-15px;animation-duration:4.3s;animation-delay:-2.6s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:96px;top:202px;--s:-29px;animation-duration:3.7s;animation-delay:-3.0s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:308px;top:247px;--s:-23px;animation-duration:4.6s;animation-delay:0.0s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:300px;top:247px;--s:-15px;animation-duration:3.7s;animation-delay:-0.7s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:314px;top:247px;--s:-23px;animation-duration:4.1s;animation-delay:-1.6s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:314px;top:247px;--s:-16px;animation-duration:4.1s;animation-delay:-2.5s&quot;&gt;&lt;/span&gt;&lt;span style=&quot;left:298px;top:247px;--s:16px;animation-duration:4.6s;animation-delay:-3.7s&quot;&gt;&lt;/span&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p style="position:absolute;left:128px;top:64px;font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">O que aprendi em campo nos EUA</p>
+<h2 style="position:absolute;left:128px;top:104px;width:1660px;font-family:'Fraunces', Georgia, serif;font-size:84px;font-weight:600;line-height:1.1;color:#FBF7EE;text-shadow:0 2px 14px rgba(0,0,0,.6)">O cafezinho que a IA não serve.</h2>
+<p data-build-in="fade order 1 auto" style="position:absolute;left:128px;top:222px;width:720px;padding:14px 24px;border-radius:14px;background:rgba(20,26,34,.72);font-size:28px;color:#DDE6F0"><b style="color:#FFFFFF">EUA:</b> pauta primeiro. A confiança vem da entrega.</p>
+<p data-build-in="fade order 2 auto" style="position:absolute;left:1080px;top:222px;width:720px;padding:14px 24px;border-radius:14px;background:rgba(40,22,10,.72);font-size:28px;color:#F6E2C4"><b style="color:#F2B705">BRASIL:</b> café primeiro. A confiança vem da relação.</p>
+<p data-build-in="fade order 3 auto" style="position:absolute;left:128px;top:800px;width:760px;padding:12px 22px;border-radius:12px;background:rgba(16,14,12,.7);font-size:24px;color:#DDE6F0">52% dos trabalhadores nos EUA estão preocupados com a IA no trabalho. <span style="color:#9AA6B4">Pew Research, 2025</span></p>
+<p data-build-in="fade order 4 auto" style="position:absolute;left:0px;top:912px;width:1920px;text-align:center;font-family:'Fraunces', Georgia, serif;font-size:50px;font-weight:600;color:#F2B705;text-shadow:0 2px 14px rgba(0,0,0,.6)">A pauta diz o que o cliente pede. O café revela por que ele pede.</p>
+<p data-build-in="fade order 5 auto" style="position:absolute;left:0px;top:990px;width:1920px;text-align:center;font-size:30px;color:#EFE7D8;text-shadow:0 2px 14px rgba(0,0,0,.6)">E o porquê não se automatiza.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">23</span><span>O cafezinho que a IA não serve.</span></p>
+</article>
+<article class="card" id="slide-24" aria-label="Slide 24: “Qual deveria ser o papel dos humanos?”">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="ia-responde" style="background:radial-gradient(circle at 21% 44%, #2B200A 0%, #0C0B09 48%, #040404 100%);color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:820px;height:1080px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:&#x27;Courier New&#x27;,monospace}
+.ent{position:absolute;inset:0;animation:arrive 2.2s cubic-bezier(.2,.8,.2,1) .3s both}
+@keyframes arrive{0%{opacity:0;transform:scale(.55);filter:blur(18px)}60%{opacity:1;filter:blur(2px)}100%{opacity:1;transform:none;filter:none}}
+.beam{position:absolute;left:330px;top:-20px;width:160px;height:500px;background:linear-gradient(180deg,rgba(127,231,255,0),rgba(127,231,255,.18) 40%,rgba(242,183,5,.35));clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);filter:blur(6px);animation:flick 3.2s ease-in-out infinite}
+@keyframes flick{0%,100%{opacity:.55}45%{opacity:1}50%{opacity:.7}55%{opacity:1}}
+.halo{position:absolute;left:110px;top:170px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(242,183,5,.38),rgba(242,183,5,.08) 45%,rgba(242,183,5,0) 68%);animation:breathe 4.5s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.9);opacity:.75}50%{transform:scale(1.08);opacity:1}}
+.orb{position:absolute;left:410px;top:470px;width:0;height:0;perspective:900px}
+.r{position:absolute;border-radius:50%;transform-style:preserve-3d}
+.r1{left:-230px;top:-230px;width:460px;height:460px;border:2px dashed rgba(127,231,255,.55);animation:s1 14s linear infinite}
+.r2{left:-185px;top:-185px;width:370px;height:370px;border:3px solid rgba(242,183,5,.5);border-left-color:transparent;border-right-color:transparent;animation:s2 9s linear infinite}
+.r3{left:-270px;top:-270px;width:540px;height:540px;border:1px solid rgba(127,231,255,.3);animation:s3 20s linear infinite}
+@keyframes s1{from{transform:rotateX(70deg) rotateZ(0)}to{transform:rotateX(70deg) rotateZ(360deg)}}
+@keyframes s2{from{transform:rotateY(65deg) rotateZ(0)}to{transform:rotateY(65deg) rotateZ(-360deg)}}
+@keyframes s3{from{transform:rotateX(60deg) rotateY(-30deg) rotateZ(0)}to{transform:rotateX(60deg) rotateY(-30deg) rotateZ(360deg)}}
+.r1:after{content:&quot;&quot;;position:absolute;left:50%;top:-8px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#7FE7FF;box-shadow:0 0 18px 4px #7FE7FF}
+.hex{position:absolute;left:210px;top:270px;width:400px;height:400px;animation:spin 30s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.eye{position:absolute;left:315px;top:375px;width:190px;height:190px;border-radius:50%;background:repeating-conic-gradient(from 0deg,#2B2A27 0 9deg,#46423A 9deg 12deg);box-shadow:0 0 0 6px #14130F,0 0 0 8px rgba(242,183,5,.7),0 0 80px 20px rgba(242,183,5,.45);animation:spin 18s linear infinite reverse}
+.iris{position:absolute;left:340px;top:400px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#FFFFFF 0,#FFF2B8 14%,#F2B705 38%,#9A6A00 62%,#2A1E05 72%);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(.94);box-shadow:0 0 40px 10px rgba(242,183,5,.55)}50%{transform:scale(1.04);box-shadow:0 0 90px 30px rgba(242,183,5,.85)}}
+.pupil{position:absolute;left:395px;top:455px;width:30px;height:30px;border-radius:50%;background:#fff;box-shadow:0 0 30px 12px #fff,0 0 60px 20px #FFE48A;animation:look 7s ease-in-out infinite}
+@keyframes look{0%,18%,100%{transform:translate(0,0)}25%,40%{transform:translate(-26px,4px)}48%,62%{transform:translate(24px,-6px)}70%,80%{transform:translate(0,0) scale(1.4)}}
+.lid{position:absolute;left:315px;top:375px;width:190px;height:190px;border-radius:50%;overflow:hidden;pointer-events:none}
+.lid:before,.lid:after{content:&quot;&quot;;position:absolute;left:0;width:100%;height:0;background:#0B0A08;animation:blink 6s infinite}
+.lid:before{top:0}.lid:after{bottom:0}
+@keyframes blink{0%,92%,100%{height:0}95%{height:52%}}
+.wave{position:absolute;left:193px;top:790px;width:434px;height:80px;display:flex;align-items:center;gap:6px}
+.wave b{width:8px;height:70px;border-radius:4px;background:linear-gradient(#7FE7FF,#F2B705);transform:scaleY(.15);animation:talk 1s ease-in-out infinite alternate}
+@keyframes talk{to{transform:scaleY(1)}}
+.lab{position:absolute;left:0;width:820px;top:905px;text-align:center;color:#F2B705;font-size:24px;letter-spacing:8px;font-weight:700}
+.lab span{display:inline-block;width:14px;height:14px;border-radius:50%;background:#7FE7FF;margin-right:14px;box-shadow:0 0 14px #7FE7FF;animation:dot 1.2s steps(2) infinite}
+@keyframes dot{50%{opacity:.15}}
+.p i{position:absolute;bottom:-20px;border-radius:50%;background:#FFE48A;box-shadow:0 0 10px 2px rgba(242,183,5,.8);opacity:0;animation:rise 8s linear infinite}
+@keyframes rise{0%{transform:translateY(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-1000px) translateX(30px);opacity:0}}
+.scan{position:absolute;left:0;width:820px;height:3px;background:linear-gradient(90deg,rgba(127,231,255,0),rgba(127,231,255,.7),rgba(127,231,255,0));animation:sc 5s linear infinite}
+@keyframes sc{from{top:-10px}to{top:1090px}}
+.lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 4px);pointer-events:none}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;p&quot;&gt;&lt;i style=&quot;left:371px;animation-delay:8.5s;animation-duration:8.0s;width:3px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:588px;animation-delay:0.8s;animation-duration:8.9s;width:4px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:128px;animation-delay:3.9s;animation-duration:6.3s;width:3px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:100px;animation-delay:7.4s;animation-duration:6.6s;width:4px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:630px;animation-delay:5.3s;animation-duration:6.2s;width:4px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:610px;animation-delay:7.7s;animation-duration:7.4s;width:4px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:624px;animation-delay:2.8s;animation-duration:10.1s;width:4px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:635px;animation-delay:5.1s;animation-duration:6.9s;width:3px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:617px;animation-delay:0.5s;animation-duration:7.0s;width:6px;height:5px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:516px;animation-delay:5.3s;animation-duration:8.3s;width:5px;height:4px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:224px;animation-delay:6.3s;animation-duration:7.2s;width:5px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:391px;animation-delay:6.6s;animation-duration:7.4s;width:3px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:564px;animation-delay:3.8s;animation-duration:9.8s;width:4px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:471px;animation-delay:0.4s;animation-duration:9.3s;width:5px;height:5px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:751px;animation-delay:3.2s;animation-duration:8.5s;width:6px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:135px;animation-delay:8.5s;animation-duration:8.4s;width:3px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:758px;animation-delay:2.8s;animation-duration:8.9s;width:6px;height:5px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:773px;animation-delay:3.5s;animation-duration:9.3s;width:3px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:403px;animation-delay:1.5s;animation-duration:6.6s;width:3px;height:4px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:334px;animation-delay:1.2s;animation-duration:7.2s;width:6px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:122px;animation-delay:1.5s;animation-duration:8.0s;width:5px;height:4px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:480px;animation-delay:7.8s;animation-duration:7.4s;width:6px;height:5px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:739px;animation-delay:8.0s;animation-duration:10.8s;width:4px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:220px;animation-delay:1.4s;animation-duration:9.3s;width:3px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:643px;animation-delay:1.6s;animation-duration:7.4s;width:4px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:587px;animation-delay:3.3s;animation-duration:8.8s;width:4px;height:3px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:507px;animation-delay:8.1s;animation-duration:9.9s;width:6px;height:6px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:448px;animation-delay:3.5s;animation-duration:8.4s;width:6px;height:3px&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;div class=&quot;ent&quot;&gt;
+&lt;div class=&quot;beam&quot;&gt;&lt;/div&gt;&lt;div class=&quot;halo&quot;&gt;&lt;/div&gt;
+&lt;svg class=&quot;hex&quot; viewBox=&quot;0 0 400 400&quot;&gt;&lt;polygon points=&quot;200,12 363,106 363,294 200,388 37,294 37,106&quot; fill=&quot;none&quot; stroke=&quot;rgba(242,183,5,.55)&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;14 10&quot;/&gt;&lt;polygon points=&quot;200,52 328,126 328,274 200,348 72,274 72,126&quot; fill=&quot;none&quot; stroke=&quot;rgba(127,231,255,.35)&quot; stroke-width=&quot;1&quot;/&gt;&lt;/svg&gt;
+&lt;div class=&quot;orb&quot;&gt;&lt;div class=&quot;r r3&quot;&gt;&lt;/div&gt;&lt;div class=&quot;r r1&quot;&gt;&lt;/div&gt;&lt;div class=&quot;r r2&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;&lt;div class=&quot;iris&quot;&gt;&lt;/div&gt;&lt;div class=&quot;pupil&quot;&gt;&lt;/div&gt;&lt;div class=&quot;lid&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;wave&quot;&gt;&lt;b style=&quot;animation-delay:0.23s;animation-duration:1.39s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.53s;animation-duration:0.78s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.72s;animation-duration:0.77s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.68s;animation-duration:1.08s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:1.14s;animation-duration:1.13s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.08s;animation-duration:0.85s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.45s;animation-duration:1.14s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:1.15s;animation-duration:1.12s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.57s;animation-duration:0.78s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.59s;animation-duration:1.38s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.58s;animation-duration:0.92s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.17s;animation-duration:1.22s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.89s;animation-duration:1.04s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.83s;animation-duration:1.06s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.25s;animation-duration:1.37s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.43s;animation-duration:1.18s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:1.10s;animation-duration:1.23s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.36s;animation-duration:1.15s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.11s;animation-duration:1.29s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.62s;animation-duration:1.34s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.43s;animation-duration:0.86s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.65s;animation-duration:1.05s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.76s;animation-duration:1.13s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.95s;animation-duration:1.23s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.23s;animation-duration:0.87s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.48s;animation-duration:1.26s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.24s;animation-duration:1.04s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.88s;animation-duration:1.39s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.95s;animation-duration:1.03s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.23s;animation-duration:1.12s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;animation-delay:0.41s;animation-duration:1.27s&quot;&gt;&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;lab&quot;&gt;&lt;span&gt;&lt;/span&gt;IA CONECTADA&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;scan&quot;&gt;&lt;/div&gt;&lt;div class=&quot;lines&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<div style="position:absolute;left:740px;top:469px;width:120px;height:2px;background:linear-gradient(90deg, rgba(242,183,5,0), #F2B705)"></div>
+<p style="position:absolute;left:860px;top:128px;width:932px;font-family:'Courier New', monospace;font-size:24px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#7FE7FF">Eu perguntei para uma IA</p>
+<h2 style="position:absolute;left:860px;top:180px;width:932px;font-family:'Fraunces', Georgia, serif;font-size:60px;font-weight:600;line-height:1.1">“Qual deveria ser o papel dos humanos?”</h2>
+<div style="position:absolute;left:860px;top:380px;width:932px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;background:rgba(12,13,14,0.78);border:1px solid rgba(127,231,255,0.35);border-left:5px solid #F2B705;border-radius:10px;padding:36px 48px;box-shadow:0 0 70px rgba(242,183,5,0.14)">
+<p style="font-family:'Courier New', monospace;font-size:20px;font-weight:700;letter-spacing:5px;color:#7FE7FF">◉ RESPOSTA RECEBIDA</p>
+<p data-build-in="fade order 1" style="font-size:30px;line-height:1.4"><span style="font-family:'Courier New',monospace;color:#F2B705;font-weight:700;margin-right:14px">›</span>Eu consigo gerar respostas. Vocês decidem quais perguntas valem a pena.</p>
+<p data-build-in="fade order 2" style="font-size:30px;line-height:1.4"><span style="font-family:'Courier New',monospace;color:#F2B705;font-weight:700;margin-right:14px">›</span>Eu otimizo o que me pedem. Vocês escolhem o que merece ser pedido.</p>
+<p data-build-in="fade order 3" style="font-size:30px;line-height:1.4"><span style="font-family:'Courier New',monospace;color:#F2B705;font-weight:700;margin-right:14px">›</span>Vocês vivem as consequências das escolhas. Por isso elas devem continuar sendo suas.</p>
+<p data-build-in="fade order 4" style="font-size:30px;line-height:1.4;color:#F2B705;font-weight:700"><span style="font-family:'Courier New',monospace;color:#F2B705;font-weight:700;margin-right:14px">›</span>O papel de vocês não é competir comigo em velocidade. É dar direção, cuidar uns dos outros e responder pelo que construímos juntos.</p>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">24</span><span>“Qual deveria ser o papel dos humanos?”</span></p>
+</article>
+<article class="card" id="slide-25" aria-label="Slide 25: Em 5 palavras, o que nenhuma IA pode fazer por você?">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="chat-vivo" style="background:radial-gradient(circle at 78% 48%, #2B200A 0%, #12100D 50%, #0A0908 100%);color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="position:absolute;left:128px;top:150px;width:1000px;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Para pensar</p>
+<h1 style="position:absolute;left:128px;top:210px;width:1000px;font-family:'Fraunces', Georgia, serif;font-size:88px;font-weight:600;line-height:1.08">Em 5 palavras, o que nenhuma IA pode fazer por você?</h1>
+<p style="position:absolute;left:128px;top:640px;width:1000px;font-size:34px;line-height:1.35;color:#CFC6B8">A IA já respondeu. Agora é a sua vez.</p>
+<div style="position:absolute;left:128px;top:820px;width:1000px;display:flex;gap:16px">
+<p style="flex:1;text-align:center;font-size:24px;font-weight:700;color:#F2B705;border:2px dashed #6E675C;border-radius:16px;padding:18px 0">1</p>
+<p style="flex:1;text-align:center;font-size:24px;font-weight:700;color:#F2B705;border:2px dashed #6E675C;border-radius:16px;padding:18px 0">2</p>
+<p style="flex:1;text-align:center;font-size:24px;font-weight:700;color:#F2B705;border:2px dashed #6E675C;border-radius:16px;padding:18px 0">3</p>
+<p style="flex:1;text-align:center;font-size:24px;font-weight:700;color:#F2B705;border:2px dashed #6E675C;border-radius:16px;padding:18px 0">4</p>
+<p style="flex:1;text-align:center;font-size:24px;font-weight:700;color:#F2B705;border:2px dashed #6E675C;border-radius:16px;padding:18px 0">5</p>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">25</span><span>Em 5 palavras, o que nenhuma IA pode fazer por você?</span></p>
+</article>
+<article class="card" id="slide-26" aria-label="Slide 26: O papel do humano, em três verbos">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="eu-penso" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">E o que eu penso</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">O papel do humano, em três verbos</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#F3EBDC;padding:48px;border-radius:24px"><span class="xicon" style="color:#8A5A00;width:64px;height:64px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span><h3 style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:600">Dar sentido</h3><p style="font-size:30px;color:#5A5248">Escolher o porquê antes do como.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#F3EBDC;padding:48px;border-radius:24px"><span class="xicon" style="color:#8A5A00;width:64px;height:64px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h3 style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:600">Liderar</h3><p style="font-size:30px;color:#5A5248">Levar pessoas e máquinas na mesma direção.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#1C1A17;padding:48px;border-radius:24px"><span class="xicon" style="color:#F2B705;width:64px;height:64px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><h3 style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:600;color:#F6F0E4">Ir além</h3><p style="font-size:30px;color:#CFC6B8">Fazer o que ninguém pediu, mas todo mundo precisava.</p></div>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">26</span><span>O papel do humano, em três verbos</span></p>
+</article>
+<article class="card" id="slide-27" aria-label="Slide 27: A era das convergências">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="futuro" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Futurologia · SXSW 2026, Austin</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">A era das convergências</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:128px;top:330px;width:1664px;height:470px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif}
+svg{position:absolute;inset:0}
+.p{fill:none;stroke-width:6;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.l{position:absolute;left:0;font-size:28px;font-weight:700;color:#F6F0E4;opacity:0;animation:fade .8s ease-out forwards}
+@keyframes fade{to{opacity:1}}
+.core{position:absolute;left:1290px;top:175px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#FFE48A,#F2B705 55%,rgba(242,183,5,0) 72%);opacity:0;animation:fade 1s ease-out 2.6s forwards,glow 2.4s ease-in-out 3.6s infinite}
+@keyframes glow{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.tag{position:absolute;left:1430px;top:205px;font-size:40px;font-weight:800;color:#F2B705;opacity:0;animation:fade 1s ease-out 3s forwards}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;svg width=&quot;1664&quot; height=&quot;470&quot; viewBox=&quot;0 0 1664 470&quot;&gt;
+&lt;path class=&quot;p&quot; d=&quot;M300 40 C 800 40, 1000 235, 1350 235&quot; stroke=&quot;#F2B705&quot; style=&quot;animation-delay:0s&quot;/&gt;
+&lt;path class=&quot;p&quot; d=&quot;M300 137 C 800 137, 1000 235, 1350 235&quot; stroke=&quot;#E0C37A&quot; style=&quot;animation-delay:.3s&quot;/&gt;
+&lt;path class=&quot;p&quot; d=&quot;M300 235 C 800 235, 1000 235, 1350 235&quot; stroke=&quot;#CFC6B8&quot; style=&quot;animation-delay:.6s&quot;/&gt;
+&lt;path class=&quot;p&quot; d=&quot;M300 333 C 800 333, 1000 235, 1350 235&quot; stroke=&quot;#C99307&quot; style=&quot;animation-delay:.9s&quot;/&gt;
+&lt;path class=&quot;p&quot; d=&quot;M300 430 C 800 430, 1000 235, 1350 235&quot; stroke=&quot;#8A8172&quot; style=&quot;animation-delay:1.2s&quot;/&gt;
+&lt;/svg&gt;
+&lt;div class=&quot;l&quot; style=&quot;top:22px;animation-delay:0s&quot;&gt;IA e agentes&lt;/div&gt;
+&lt;div class=&quot;l&quot; style=&quot;top:119px;animation-delay:.3s&quot;&gt;Robôs&lt;/div&gt;
+&lt;div class=&quot;l&quot; style=&quot;top:217px;animation-delay:.6s&quot;&gt;Biotecnologia&lt;/div&gt;
+&lt;div class=&quot;l&quot; style=&quot;top:315px;animation-delay:.9s&quot;&gt;Sensores&lt;/div&gt;
+&lt;div class=&quot;l&quot; style=&quot;top:412px;animation-delay:1.2s&quot;&gt;Cérebro e máquina&lt;/div&gt;
+&lt;div class=&quot;core&quot;&gt;&lt;/div&gt;&lt;div class=&quot;tag&quot;&gt;Inevitável&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p style="position:absolute;left:128px;top:830px;width:1664px;font-family:'Fraunces', Georgia, serif;font-size:32px;font-style:italic;color:#CFC6B8">“Uma tendência diz o que está mudando. Uma convergência diz o que vai se tornar inevitável.” Amy Webb</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">27</span><span>A era das convergências</span></p>
+</article>
+<article class="card" id="slide-28" aria-label="Slide 28: “Hoje ela termina o seu prompt. Amanhã, vai terminar o seu pensamento.”">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="pensamento" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">Ouvido no SXSW 2026</p>
+<h1 style="font-family:'Fraunces', Georgia, serif;font-size:104px;font-weight:600;line-height:1.1;width:1550px">“Hoje ela termina o seu prompt. Amanhã, vai terminar o seu pensamento.”</h1>
+<p data-build-in="rise" style="position:absolute;left:128px;top:820px;width:1664px;font-size:40px;font-weight:700">Então, quem começa o pensamento? <span style="color:#8A5A00">Você. O propósito é o ponto de partida.</span></p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">28</span><span>“Hoje ela termina o seu prompt. Amanhã, vai terminar o seu pensamento.”</span></p>
+</article>
+<article class="card" id="slide-29" aria-label="Slide 29: Na tempestade das convergências, seja girassol.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="girassol" style="background:#141A50;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<img loading="lazy" decoding="async" src="assets/campo-girassois.jpg" alt="Ilustração de um campo de girassóis sob céu azul, com os girassóis voltados para o sol" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:960px;top:0px;width:960px;height:1080px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+i{position:absolute;display:block;border-radius:50%;background:#F2B705;opacity:0;animation-name:fl;animation-timing-function:linear;animation-iteration-count:infinite}
+i:nth-child(3n){background:#FFD04A}i:nth-child(4n){background:#E8A800}
+@keyframes fl{0%{opacity:0;translate:0 0;rotate:0deg}10%{opacity:.95}85%{opacity:.9}100%{opacity:0;translate:-420px 620px;rotate:540deg}}
+.glint{position:absolute;left:470px;top:210px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,190,.45),rgba(255,240,190,0) 70%);animation:gl 5s ease-in-out infinite}
+@keyframes gl{50%{transform:scale(1.18);opacity:.7}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;glint&quot;&gt;&lt;/div&gt;
+&lt;i style=&quot;left:637px;top:141px;width:25px;height:10px;animation-duration:14.2s;animation-delay:-12.7s;transform:rotate(166deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:542px;top:-91px;width:17px;height:7px;animation-duration:14.9s;animation-delay:-12.4s;transform:rotate(166deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:53px;top:40px;width:17px;height:7px;animation-duration:9.8s;animation-delay:-7.5s;transform:rotate(97deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:556px;top:-16px;width:17px;height:7px;animation-duration:13.0s;animation-delay:-0.2s;transform:rotate(104deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:286px;top:66px;width:16px;height:6px;animation-duration:15.4s;animation-delay:-12.3s;transform:rotate(18deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:142px;top:512px;width:14px;height:5px;animation-duration:13.3s;animation-delay:-2.0s;transform:rotate(1deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:214px;top:100px;width:16px;height:6px;animation-duration:15.7s;animation-delay:-2.7s;transform:rotate(74deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:321px;top:83px;width:17px;height:7px;animation-duration:12.8s;animation-delay:-10.8s;transform:rotate(46deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:707px;top:81px;width:18px;height:7px;animation-duration:15.8s;animation-delay:-14.3s;transform:rotate(5deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:369px;top:304px;width:15px;height:6px;animation-duration:10.2s;animation-delay:-2.3s;transform:rotate(84deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:308px;top:497px;width:25px;height:10px;animation-duration:13.1s;animation-delay:-9.5s;transform:rotate(86deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:67px;top:197px;width:25px;height:10px;animation-duration:11.5s;animation-delay:-4.9s;transform:rotate(80deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:189px;top:372px;width:18px;height:7px;animation-duration:12.3s;animation-delay:-2.8s;transform:rotate(5deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:767px;top:246px;width:26px;height:10px;animation-duration:14.9s;animation-delay:-0.3s;transform:rotate(107deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:374px;top:265px;width:14px;height:5px;animation-duration:13.0s;animation-delay:-0.1s;transform:rotate(46deg)&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:638px;top:81px;width:21px;height:8px;animation-duration:9.8s;animation-delay:-3.9s;transform:rotate(88deg)&quot;&gt;&lt;/i&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">A analogia</p>
+<h1 style="font-family:'Fraunces', Georgia, serif;font-size:96px;font-weight:600;line-height:1.1;width:920px;color:#F6F0E4;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">Na tempestade das convergências, seja girassol.</h1>
+<p style="font-size:36px;color:#EFE7D8;width:900px;line-height:1.4;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">O girassol jovem acompanha o sol ao longo do dia. O vento muda, as nuvens passam, e ele sabe para onde se virar.</p>
+<p style="font-size:40px;font-weight:700;color:#F2B705;width:900px;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">O seu propósito é o seu sol.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">29</span><span>Na tempestade das convergências, seja girassol.</span></p>
+</article>
+<article class="card" id="slide-30" aria-label="Slide 30: Foco é escolher uma coisa.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="unica" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<img loading="lazy" decoding="async" src="assets/a-unica-coisa.webp" alt="Capas de A Única Coisa (edição brasileira) e The ONE Thing, de Gary Keller e Jay Papasan" style="position:absolute;left:128px;top:190px;width:620px;height:720px;object-fit:contain">
+<p style="position:absolute;left:840px;top:200px;width:952px;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">Uma leitura para levar</p>
+<h2 style="position:absolute;left:840px;top:256px;width:952px;font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Foco é escolher uma coisa.</h2>
+<div data-build-in="rise" style="position:absolute;left:840px;top:470px;width:952px;background:#1C1A17;color:#F6F0E4;border-radius:28px;padding:44px 52px;box-sizing:border-box">
+<p style="font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#F2B705">A pergunta do foco</p>
+<p style="font-family:'Fraunces', Georgia, serif;font-size:44px;line-height:1.25;margin-top:16px">“Qual é a ÚNICA coisa que eu posso fazer, que torna todo o resto mais fácil ou desnecessário?”</p>
+</div>
+<p style="position:absolute;left:840px;top:890px;width:952px;font-size:24px;color:#5A5248">“The ONE Thing”, no Brasil “A Única Coisa” · tradução livre</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">30</span><span>Foco é escolher uma coisa.</span></p>
+</article>
+<article class="card" id="slide-31" aria-label="Slide 31: Humano com propósito + IA">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="ciclo" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">O ciclo virtuoso</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1;width:820px">Humano com propósito + IA</h2>
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:880px;top:150px;width:912px;height:820px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:-apple-system,&#x27;Segoe UI&#x27;,Helvetica,Arial,sans-serif;color:#F6F0E4}
+.ring{position:absolute;left:206px;top:160px;width:500px;height:500px;border-radius:50%;border:6px solid #4A443B;box-sizing:border-box}
+.spin{position:absolute;left:206px;top:160px;width:500px;height:500px;animation:rot 8s linear infinite}
+.spin i{position:absolute;left:232px;top:-15px;width:36px;height:36px;border-radius:50%;background:#F2B705;box-shadow:0 0 30px 6px rgba(242,183,5,.6)}
+.trail{position:absolute;left:206px;top:160px;width:500px;height:500px;border-radius:50%;background:conic-gradient(from 0deg,rgba(242,183,5,0) 0deg,rgba(242,183,5,.0) 250deg,rgba(242,183,5,.55) 360deg);-webkit-mask:radial-gradient(circle,transparent 242px,#000 243px,#000 250px,transparent 251px);mask:radial-gradient(circle,transparent 242px,#000 243px,#000 250px,transparent 251px);animation:rot 8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.c{position:absolute;left:356px;top:310px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#FFE48A,#F2B705 60%,#C99307);display:flex;align-items:center;justify-content:center;text-align:center;color:#1C1A17;font-size:26px;font-weight:800;line-height:1.15;animation:beat 4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.n{position:absolute;width:260px;box-sizing:border-box;padding:10px 8px;background:#1C1A17;border-radius:24px;text-align:center;opacity:0;animation:in .8s ease-out forwards}
+.n b{display:block;font-size:32px;font-weight:800;color:#F2B705}
+.n span{display:block;font-size:24px;color:#CFC6B8;margin-top:4px}
+.n .k{display:inline-block;width:66px;height:66px;border-radius:50%;background:#2A2620;border:3px solid #F2B705;font-size:30px;font-weight:800;line-height:60px;margin-bottom:8px;color:#F6F0E4}
+@keyframes in{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;ring&quot;&gt;&lt;/div&gt;&lt;div class=&quot;trail&quot;&gt;&lt;/div&gt;&lt;div class=&quot;spin&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;div class=&quot;c&quot;&gt;Propósito&lt;br&gt;não se&lt;br&gt;automatiza&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:326px;top:80px;animation-delay:.2s&quot;&gt;&lt;div class=&quot;k&quot;&gt;1&lt;/div&gt;&lt;b&gt;Propósito&lt;/b&gt;&lt;span&gt;você define o porquê&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:576px;top:330px;animation-delay:.9s&quot;&gt;&lt;div class=&quot;k&quot;&gt;2&lt;/div&gt;&lt;b&gt;IA executa&lt;/b&gt;&lt;span&gt;ela acelera o como&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:326px;top:585px;animation-delay:1.6s&quot;&gt;&lt;div class=&quot;k&quot;&gt;3&lt;/div&gt;&lt;b&gt;Tempo de volta&lt;/b&gt;&lt;span&gt;horas e energia livres&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;n&quot; style=&quot;left:76px;top:330px;animation-delay:2.3s&quot;&gt;&lt;div class=&quot;k&quot;&gt;4&lt;/div&gt;&lt;b&gt;Só humano&lt;/b&gt;&lt;span&gt;presença, criatividade e cuidado&lt;/span&gt;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p data-build-in="rise" style="position:absolute;left:128px;top:560px;width:700px;font-size:36px;line-height:1.4;color:#CFC6B8">Cada volta deixa o seu propósito <span style="color:#F2B705;font-weight:700">mais forte</span> e a IA <span style="color:#F2B705;font-weight:700">mais útil</span>.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">31</span><span>Humano com propósito + IA</span></p>
+</article>
+<article class="card" id="slide-32" aria-label="Slide 32: Três passos, sete dias">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="desafio" style="background:#FBF7EE;color:#1C1A17;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#8A5A00">Seu desafio desta semana</p>
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Três passos, sete dias</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#F3EBDC;padding:48px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:96px;font-weight:700;line-height:1;color:#8A5A00">1</p><p style="font-size:36px;font-weight:700">Escreva o seu porquê em uma frase.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#F3EBDC;padding:48px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:96px;font-weight:700;line-height:1;color:#8A5A00">2</p><p style="font-size:36px;font-weight:700">Entregue para a IA uma tarefa que te afasta dele.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1C1A17;padding:48px;border-radius:24px"><p style="font-family:'Fraunces', Georgia, serif;font-size:96px;font-weight:700;line-height:1;color:#F2B705">3</p><p style="font-size:36px;font-weight:700;color:#F6F0E4">Invista o tempo ganho no que só você faz.</p></div>
+</div>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">32</span><span>Três passos, sete dias</span></p>
+</article>
+<article class="card" id="slide-33" aria-label="Slide 33: Uma carta para 2036">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="carta-2036" style="background:#1C1A17;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<p style="position:absolute;left:128px;top:128px;width:1664px;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705">Uma carta para 2036</p>
+<div data-build-in="rise" style="position:absolute;left:300px;top:220px;width:1320px;box-sizing:border-box;background:#FBF7EE;color:#1C1A17;border-radius:12px;padding:72px 96px;box-shadow:0 40px 80px rgba(0,0,0,0.45);transform:rotate(-1.2deg)">
+<p style="font-family:'Fraunces', Georgia, serif;font-size:44px;font-style:italic;color:#8A5A00">Para os meus filhos, daqui a dez anos,</p>
+<p style="font-family:'Fraunces', Georgia, serif;font-size:56px;font-weight:600;line-height:1.25;margin-top:36px">Espero que vocês digam: “Ele usou a IA para ganhar tempo. E gastou esse tempo com a gente.”</p>
+<p style="font-size:30px;color:#5A5248;margin-top:40px">Com amor, do seu pai de 2026.</p>
+<p style="position:absolute;right:56px;top:40px;font-family:'Fraunces', Georgia, serif;font-size:40px;font-weight:700;color:#F2B705;border:4px solid #F2B705;border-radius:10px;padding:6px 18px;transform:rotate(6deg)">2036</p>
+</div>
+<p data-build-in="fade" style="position:absolute;left:128px;top:900px;width:1664px;text-align:center;font-size:36px;color:#CFC6B8">E você? O que quer que digam de você em 2036?</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">33</span><span>Uma carta para 2036</span></p>
+</article>
+<article class="card" id="slide-34" aria-label="Slide 34: Automatize tarefas. Proteja o seu propósito.">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="fechamento" style="background:#0E1440;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<img loading="lazy" decoding="async" src="assets/montanha.jpg" alt="Ilustração de uma pessoa no topo de uma montanha com os braços para o alto, acima de um mar de nuvens, ao nascer do sol, com pétalas douradas no ar" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<p style="font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F2B705;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">Lembra dos jovens do camp?</p>
+<h1 style="font-family:'Fraunces', Georgia, serif;font-size:128px;font-weight:700;line-height:1.05;width:1600px;color:#F6F0E4;text-shadow:0px 3px 18px rgba(0,0,0,0.75)">Automatize tarefas. Proteja o seu propósito.</h1>
+<img loading="lazy" decoding="async" src="assets/logo-sunflower.png" alt="Logo Sunflower" style="position:absolute;left:1472px;top:912px;width:320px;height:81px;object-fit:contain">
+</section>
+
+</div></div>
+<p class="cap"><span class="num">34</span><span>Automatize tarefas. Proteja o seu propósito.</span></p>
+</article>
+<article class="card" id="slide-35" aria-label="Slide 35: Obrigado!">
+<div class="frame"><div class="stage">
+<section class="slide" data-id="perguntas" style="background:#0E0E3A;color:#F6F0E4;font-family:'DM Sans', Arial, sans-serif;padding:0">
+<img loading="lazy" decoding="async" src="assets/girassol-entardecer.jpg" alt="O mesmo girassol da abertura, ao entardecer, diante de um campo de girassóis" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<iframe class="embed" title="Animação" aria-hidden="true" tabindex="-1" sandbox="allow-scripts" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px" data-srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}.g{position:absolute;left:1030px;top:70px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.35),rgba(255,214,130,0) 65%);animation:gl 6s ease-in-out infinite}@keyframes gl{50%{transform:scale(1.12);opacity:.6}}i{position:absolute;display:block;border-radius:50%;background:#F7C531;opacity:0;animation:fl linear infinite}i:nth-child(3n){background:#FFD54F}@keyframes fl{0%{opacity:0;transform:translate(0,0) rotate(0)}8%{opacity:.95}85%{opacity:.85}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(620deg)}}b{position:absolute;width:4px;height:4px;border-radius:50%;background:#E6ECFF;box-shadow:0 0 8px 2px rgba(180,200,255,.8);opacity:.2;animation:tw ease-in-out infinite}@keyframes tw{50%{opacity:1;transform:scale(1.6)}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;g&quot;&gt;&lt;/div&gt;&lt;i style=&quot;left:1479px;top:537px;width:26px;height:7px;animation-duration:16.0s;animation-delay:-12.4s;--dx:-849px;--dy:98px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1293px;top:404px;width:19px;height:10px;animation-duration:14.3s;animation-delay:-9.2s;--dx:-708px;--dy:154px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1342px;top:600px;width:22px;height:8px;animation-duration:15.6s;animation-delay:-1.2s;--dx:-1071px;--dy:231px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1283px;top:620px;width:16px;height:8px;animation-duration:15.6s;animation-delay:-15.4s;--dx:-800px;--dy:137px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1355px;top:342px;width:26px;height:8px;animation-duration:12.1s;animation-delay:-15.5s;--dx:-818px;--dy:408px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1383px;top:278px;width:22px;height:8px;animation-duration:16.6s;animation-delay:-4.2s;--dx:-899px;--dy:358px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1464px;top:485px;width:21px;height:7px;animation-duration:12.9s;animation-delay:-13.1s;--dx:-988px;--dy:187px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1422px;top:524px;width:16px;height:9px;animation-duration:16.9s;animation-delay:-0.4s;--dx:-1150px;--dy:367px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1237px;top:554px;width:21px;height:10px;animation-duration:14.5s;animation-delay:-0.1s;--dx:-728px;--dy:142px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1612px;top:341px;width:19px;height:10px;animation-duration:13.1s;animation-delay:-5.7s;--dx:-1015px;--dy:344px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1273px;top:539px;width:21px;height:9px;animation-duration:11.2s;animation-delay:-15.1s;--dx:-755px;--dy:196px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1474px;top:601px;width:21px;height:9px;animation-duration:16.5s;animation-delay:-8.7s;--dx:-887px;--dy:188px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1301px;top:298px;width:18px;height:9px;animation-duration:17.0s;animation-delay:-2.6s;--dx:-729px;--dy:415px&quot;&gt;&lt;/i&gt;&lt;i style=&quot;left:1443px;top:416px;width:19px;height:9px;animation-duration:16.0s;animation-delay:-7.3s;--dx:-953px;--dy:99px&quot;&gt;&lt;/i&gt;&lt;b style=&quot;left:1055px;top:40px;animation-duration:3.7s;animation-delay:-4.2s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:168px;top:459px;animation-duration:4.9s;animation-delay:-3.2s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:910px;top:84px;animation-duration:3.6s;animation-delay:-0.7s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:975px;top:197px;animation-duration:3.6s;animation-delay:-5.0s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:983px;top:606px;animation-duration:3.6s;animation-delay:-2.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:844px;top:307px;animation-duration:3.2s;animation-delay:-2.0s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:186px;top:246px;animation-duration:5.0s;animation-delay:-4.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:728px;top:320px;animation-duration:3.3s;animation-delay:-0.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:328px;top:489px;animation-duration:4.7s;animation-delay:-1.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:908px;top:485px;animation-duration:4.2s;animation-delay:-3.3s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:878px;top:238px;animation-duration:4.3s;animation-delay:-1.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:569px;top:482px;animation-duration:4.2s;animation-delay:-1.5s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:1088px;top:410px;animation-duration:4.0s;animation-delay:-0.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:638px;top:170px;animation-duration:4.2s;animation-delay:-2.3s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:943px;top:408px;animation-duration:4.5s;animation-delay:-1.7s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:748px;top:463px;animation-duration:4.6s;animation-delay:-1.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:972px;top:542px;animation-duration:4.2s;animation-delay:-4.9s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:1101px;top:331px;animation-duration:3.8s;animation-delay:-0.8s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:965px;top:582px;animation-duration:3.7s;animation-delay:-3.5s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:833px;top:458px;animation-duration:2.9s;animation-delay:-3.9s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:676px;top:419px;animation-duration:3.6s;animation-delay:-3.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:895px;top:402px;animation-duration:4.3s;animation-delay:-0.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:201px;top:285px;animation-duration:4.1s;animation-delay:-1.1s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:795px;top:399px;animation-duration:2.6s;animation-delay:-2.4s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:276px;top:52px;animation-duration:2.8s;animation-delay:-1.6s&quot;&gt;&lt;/b&gt;&lt;b style=&quot;left:225px;top:136px;animation-duration:2.6s;animation-delay:-2.3s&quot;&gt;&lt;/b&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<img loading="lazy" decoding="async" src="assets/logo-sunflower.png" alt="Logo oficial do Seminário Internacional Sunflower" style="position:absolute;left:128px;top:84px;width:400px;height:102px;object-fit:contain">
+<p style="position:absolute;left:128px;top:250px;font-size:28px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:#F2B705">Comunidade Sunflower</p>
+<h1 style="position:absolute;left:128px;top:296px;width:1080px;font-family:'Fraunces', Georgia, serif;font-size:176px;font-weight:600;line-height:1;color:#FBF7EE;text-shadow:0 2px 18px rgba(0,0,0,.55)">Obrigado!</h1>
+<p style="position:absolute;left:128px;top:496px;width:1000px;font-size:36px;color:#E4DCCB;text-shadow:0 2px 18px rgba(0,0,0,.55)">Vamos continuar a conversa no LinkedIn ou no Instagram.</p>
+<div style="position:absolute;left:128px;top:610px;display:flex;align-items:center;gap:36px;padding:24px 40px 24px 24px;border-radius:28px;background:rgba(10,10,36,.66)">
+<img loading="lazy" decoding="async" src="assets/qr-linkedin.png" alt="QR code para o LinkedIn de Pedro Pereira" style="width:220px;height:220px;border-radius:14px;object-fit:contain">
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:44px;font-weight:700;color:#FBF7EE">Pedro Pereira</p>
+<p style="font-size:30px;color:#E4DCCB">LinkedIn <b style="color:#F2B705">in/pedrop</b></p>
+<p style="font-size:30px;color:#E4DCCB">Instagram <b style="color:#F2B705">@pedro_s_pereira</b></p>
+<p style="font-size:24px;color:#B9B2C8">Aponte a câmera para o QR code</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;top:960px;width:1100px;font-family:'Fraunces', Georgia, serif;font-size:36px;font-style:italic;color:#F2B705;text-shadow:0 2px 18px rgba(0,0,0,.55)">Propósito não se automatiza.</p>
+</section>
+
+</div></div>
+<p class="cap"><span class="num">35</span><span>Obrigado!</span></p>
+</article>
+</main>
+
+<footer><div class="wrap">
+  <div class="row"><img src="assets/logo-sunflower.png" alt="Seminário Internacional Sunflower"><span>Palestra de Pedro Pereira no 5º Seminário Internacional Sunflower, 7 de novembro de 2026.</span></div>
+  <div class="row" style="margin-top:10px"><a href="https://www.linkedin.com/in/pedrop" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/pedro_s_pereira" target="_blank" rel="noopener">Instagram</a><span>As ilustrações foram feitas para esta apresentação.</span></div>
+</div></footer>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Slides em tela cheia">
+  <div class="vframe" id="vframe"></div>
+  <div class="hit l" id="hitL" aria-hidden="true"></div>
+  <div class="hit r" id="hitR" aria-hidden="true"></div>
+  <div class="x"><button class="btn" id="closeBtn" type="button" aria-label="Fechar tela cheia">Fechar</button></div>
+  <div class="bar">
+    <button class="btn" id="prevBtn" type="button" aria-label="Slide anterior">‹ Anterior</button>
+    <span class="count" id="count">1 / 35</span>
+    <button class="btn" id="nextBtn" type="button" aria-label="Próximo slide">Próximo ›</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var N = cards.length, root = document.documentElement;
+
+  // Build order delays
+  document.querySelectorAll('[data-build-in]').forEach(function(el){
+    var m = /order (\d+)/.exec(el.getAttribute('data-build-in'));
+    var o = m ? parseInt(m[1],10) : 1;
+    el.style.setProperty('--d', (0.25 + (o-1)*0.32).toFixed(2) + 's');
+  });
+
+  function fit(){
+    var w = cards[0].querySelector('.frame').getBoundingClientRect().width;
+    root.style.setProperty('--s', (w/1920).toString());
+    var vs = Math.min(window.innerWidth/1920, window.innerHeight/1080);
+    root.style.setProperty('--vs', vs.toString());
+  }
+  window.addEventListener('resize', fit); fit();
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.getElementById('list'));
+
+  function play(slide){
+    slide.classList.remove('play'); void slide.offsetWidth; slide.classList.add('play');
+    slide.querySelectorAll('iframe.embed').forEach(function(f){ f.srcdoc = f.getAttribute('data-srcdoc'); });
+  }
+  function stop(slide){
+    slide.classList.remove('play');
+    slide.querySelectorAll('iframe.embed').forEach(function(f){ f.removeAttribute('srcdoc'); f.src = 'about:blank'; });
+  }
+
+  // Play each slide once it is mostly in view; reset when it leaves far away
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        var s = e.target.querySelector('.slide');
+        if (e.isIntersecting && e.intersectionRatio >= 0.45){ if (!s.classList.contains('play')) play(s); }
+        else if (!e.isIntersecting){ if (s.classList.contains('play')) stop(s); }
+      });
+    }, {threshold:[0,0.45]});
+    cards.forEach(function(c){ io.observe(c); });
+  } else { cards.forEach(function(c){ play(c.querySelector('.slide')); }); }
+
+  // Viewer
+  var viewer = document.getElementById('viewer'), vframe = document.getElementById('vframe');
+  var count = document.getElementById('count'), cur = 0, idleT, lastFocus;
+  function show(i){
+    cur = Math.max(0, Math.min(N-1, i));
+    vframe.innerHTML = '';
+    var st = cards[cur].querySelector('.stage').cloneNode(true);
+    vframe.appendChild(st);
+    play(st.querySelector('.slide'));
+    count.textContent = (cur+1) + ' / ' + N;
+    try { history.replaceState(null, '', '#slide-' + (cur+1)); } catch(e){}
+  }
+  function open(i){
+    lastFocus = document.activeElement;
+    viewer.classList.add('on'); document.body.classList.add('lock'); fit(); show(i); poke();
+    if (viewer.requestFullscreen && window.matchMedia('(hover:hover)').matches) { viewer.requestFullscreen().catch(function(){}); }
+    document.getElementById('nextBtn').focus();
+  }
+  function close(){
+    viewer.classList.remove('on'); document.body.classList.remove('lock'); vframe.innerHTML = '';
+    if (document.fullscreenElement) document.exitFullscreen().catch(function(){});
+    cards[cur].scrollIntoView({block:'center', behavior:'auto'});
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function poke(){ viewer.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(function(){ viewer.classList.add('idle'); }, 2500); }
+
+  cards.forEach(function(c, i){
+    var f = c.querySelector('.frame');
+    f.setAttribute('tabindex','0'); f.setAttribute('role','button');
+    f.setAttribute('aria-label','Abrir o slide ' + (i+1) + ' em tela cheia');
+    f.addEventListener('click', function(){ open(i); });
+    f.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(i); } });
+  });
+  document.getElementById('startBtn').addEventListener('click', function(){
+    var best = 0, bd = Infinity;
+    cards.forEach(function(c, i){ var d = Math.abs(c.getBoundingClientRect().top - 80); if (d < bd){ bd = d; best = i; } });
+    open(window.scrollY < 200 ? 0 : best);
+  });
+  document.getElementById('prevBtn').addEventListener('click', function(){ show(cur-1); poke(); });
+  document.getElementById('nextBtn').addEventListener('click', function(){ show(cur+1); poke(); });
+  document.getElementById('hitL').addEventListener('click', function(){ show(cur-1); poke(); });
+  document.getElementById('hitR').addEventListener('click', function(){ show(cur+1); poke(); });
+  document.getElementById('closeBtn').addEventListener('click', close);
+  document.addEventListener('fullscreenchange', function(){ fit(); });
+  viewer.addEventListener('mousemove', poke);
+  document.addEventListener('keydown', function(e){
+    if (!viewer.classList.contains('on')) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && e.target.tagName !== 'BUTTON')){ e.preventDefault(); show(cur+1); poke(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); show(cur-1); poke(); }
+    else if (e.key === 'Home'){ show(0); } else if (e.key === 'End'){ show(N-1); }
+    else if (e.key === 'Escape'){ close(); }
+  });
+  var tx = null, ty = null;
+  viewer.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; poke(); }, {passive:true});
+  viewer.addEventListener('touchend', function(e){
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { show(cur + (dx < 0 ? 1 : -1)); }
+  }, {passive:true});
+
+  // Deep link: #slide-N opens that slide in place
+  var m = /^#slide-(\d+)$/.exec(location.hash);
+  if (m){ var k = parseInt(m[1],10)-1; if (cards[k]) setTimeout(function(){ cards[k].scrollIntoView({block:'start'}); }, 50); }
+})();
+</script>
+</body>
+</html>
