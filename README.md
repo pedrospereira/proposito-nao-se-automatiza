@@ -1,0 +1,1 @@
+# proposito-nao-se-automatiza
